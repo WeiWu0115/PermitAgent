@@ -1,0 +1,49 @@
+{
+  "source": "FilmLA / LAPD / Various LA City Departments",
+  "last_updated": "2025-05",
+  "rules": [
+    {
+      "rule_id": "SENSITIVE-SCHOOL-001",
+      "source": "California Law / LAPD Policy / FilmLA",
+      "summary": "Realistic-looking firearms within 1,000 feet of a K-12 school require LAPD notification via FilmLA and typically an LAPD officer on set. Recommended to film during non-school hours.",
+      "applies_to": ["gun", "rifle", "pistol", "firearm", "replica_weapon"],
+      "mandatory": true,
+      "details": {
+        "buffer_zone_feet": 1000,
+        "applies_to_schools": "K-12",
+        "lapd_notification_required": true,
+        "recommendation": "Film when school is not in session"
+      }
+    },
+    {
+      "rule_id": "SENSITIVE-HOSPITAL-001",
+      "source": "FilmLA Guidelines",
+      "summary": "Filming within 500 feet of a hospital requires notification to hospital administration. Ambulance access must remain unobstructed. Noise restrictions are stricter near hospitals. FilmLA coordinates notification with hospital security.",
+      "applies_to": ["hospital_proximity"],
+      "mandatory": true,
+      "details": {
+        "buffer_zone_feet": 500,
+        "ambulance_access_required": true,
+        "stricter_noise_rules": true
+      }
+    },
+    {
+      "rule_id": "SENSITIVE-GOVT-001",
+      "source": "Federal Protective Service / GSA / LA City Dept of General Services",
+      "summary": "Filming near federal buildings requires Federal Protective Service and GSA coordination. LA City Hall and civic buildings have their own permitting. Equipment/crew must stay 50-100 feet from building entrances without permission.",
+      "applies_to": ["government_building"],
+      "mandatory": true,
+      "details": {
+        "federal_building_coordination": ["Federal Protective Service", "GSA"],
+        "entrance_clearance_feet": "50-100"
+      }
+    },
+    {
+      "rule_id": "SENSITIVE-RESIDENTIAL-001",
+      "source": "LAMC Section 45.19",
+      "summary": "Some Specific Plan areas (Hollywood, parts of the Valley) limit the number of filming days per year at any single residential location. Additional restrictions on frequency and duration may apply.",
+      "applies_to": ["residential_filming"],
+      "mandatory": true
+    }
+  ]
+}

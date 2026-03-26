@@ -1,0 +1,59 @@
+{
+  "source": "LAMC Chapter XI, Article 2 (Sections 111.00-116.01)",
+  "last_updated": "2025-05",
+  "rules": [
+    {
+      "rule_id": "NOISE-AMPLIFIED-001",
+      "source": "LAMC Section 112.01",
+      "summary": "Sound-amplifying equipment must not be audible at 150 feet from the source in residential or commercial zones between 10:00 PM and 7:00 AM.",
+      "applies_to": ["amplified_sound", "night_shoot"],
+      "mandatory": true,
+      "details": {
+        "quiet_hours_start": "10:00 PM",
+        "quiet_hours_end": "7:00 AM",
+        "max_audible_distance_feet": 150
+      }
+    },
+    {
+      "rule_id": "NOISE-GENERATOR-001",
+      "source": "LAMC Section 112.04",
+      "summary": "Powered equipment (including generators) prohibited between 10 PM and 7 AM in or within 500 feet of residential zones. Daytime limit: 75 dBA at 50 feet.",
+      "applies_to": ["generator", "powered_equipment"],
+      "mandatory": true,
+      "details": {
+        "prohibited_hours_start": "10:00 PM",
+        "prohibited_hours_end": "7:00 AM",
+        "residential_buffer_feet": 500,
+        "daytime_max_dba": 75,
+        "measurement_distance_feet": 50
+      }
+    },
+    {
+      "rule_id": "NOISE-CONSTRUCTION-001",
+      "source": "LAMC Section 114.02",
+      "summary": "Construction activity (including set-building) prohibited 9 PM-7 AM weekdays, 6 PM-8 AM weekends.",
+      "applies_to": ["set_construction"],
+      "mandatory": true,
+      "details": {
+        "weekday_prohibited_start": "9:00 PM",
+        "weekday_prohibited_end": "7:00 AM",
+        "weekend_prohibited_start": "6:00 PM",
+        "weekend_prohibited_end": "8:00 AM"
+      }
+    },
+    {
+      "rule_id": "NOISE-VARIANCE-001",
+      "source": "LAMC Section 115.02",
+      "summary": "Film permits can include noise ordinance variances, but conditions are typically imposed (e.g., no amplified sound after 10 PM in residential areas without specific approval).",
+      "applies_to": ["night_shoot", "amplified_sound"],
+      "mandatory": false
+    },
+    {
+      "rule_id": "NOISE-PENALTY-001",
+      "source": "LAMC Section 116.01",
+      "summary": "Noise ordinance violation is a misdemeanor. Fine up to $1,000 and/or up to 6 months in jail per violation. Each day is a separate offense.",
+      "applies_to": ["noise_violation"],
+      "mandatory": true
+    }
+  ]
+}

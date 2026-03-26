@@ -1,0 +1,76 @@
+{
+  "source": "LA Dept of Recreation and Parks / LA County Dept of Beaches and Harbors / California Coastal Commission",
+  "last_updated": "2025-05",
+  "rules": [
+    {
+      "rule_id": "PARK-PERMIT-001",
+      "source": "LAMC Section 42.00 / Dept of Recreation and Parks",
+      "summary": "All commercial filming in LA city parks requires a FilmLA permit plus a separate Dept of Recreation and Parks permit. Minimum 5 business days advance notice. Location fee: $500-$1,500/day. Parks monitor required at $40-$55/hour (4-hr minimum).",
+      "applies_to": ["park_filming"],
+      "mandatory": true,
+      "details": {
+        "lead_time_days": 5,
+        "location_fee_range": "$500-$1,500/day",
+        "monitor_rate": "$40-$55/hour",
+        "monitor_minimum_hours": 4,
+        "filming_hours": "sunrise to sunset (night requires special permission)"
+      }
+    },
+    {
+      "rule_id": "PARK-GRIFFITH-001",
+      "source": "Dept of Recreation and Parks / Griffith Observatory",
+      "summary": "Griffith Park has additional restrictions. Hollywood Sign vicinity and Griffith Observatory require separate permissions. Trail closures limited in duration. Fire season may prohibit pyrotechnics and restrict vehicle access on fire roads.",
+      "applies_to": ["griffith_park"],
+      "mandatory": true,
+      "details": {
+        "observatory_separate_permission": true,
+        "trail_closures_limited": true,
+        "fire_season_restrictions": true
+      }
+    },
+    {
+      "rule_id": "PARK-VEHICLES-001",
+      "source": "Dept of Recreation and Parks",
+      "summary": "Vehicles driven off paved roads in parks require special approval and ground protection (plywood, track mats) to prevent turf damage. Damage deposit typically required.",
+      "applies_to": ["vehicle_in_park"],
+      "mandatory": true
+    },
+    {
+      "rule_id": "PARK-ANIMALS-001",
+      "source": "Dept of Recreation and Parks / American Humane Association",
+      "summary": "Animals in filming must comply with American Humane Association guidelines. A representative may be required on set. Exotic or wild animals may require additional permits from LA Animal Services.",
+      "applies_to": ["animals"],
+      "mandatory": true
+    },
+    {
+      "rule_id": "BEACH-PERMIT-001",
+      "source": "LA County Dept of Beaches and Harbors / FilmLA",
+      "summary": "Commercial filming on LA County beaches requires a FilmLA permit coordinated with Dept of Beaches and Harbors. Lead time: 5-10 business days. Venice Beach boardwalk is City of LA jurisdiction (Rec & Parks). Full boardwalk closures extremely difficult.",
+      "applies_to": ["beach_filming"],
+      "mandatory": true,
+      "details": {
+        "lead_time_days": "5-10",
+        "venice_boardwalk_jurisdiction": "LA City Recreation and Parks",
+        "full_closures_difficult": true
+      }
+    },
+    {
+      "rule_id": "BEACH-VEHICLES-001",
+      "source": "Dept of Beaches and Harbors / California Coastal Commission",
+      "summary": "Vehicles on beach sand are generally prohibited. When permitted, must stay on designated access routes with ground protection. California Coastal Commission review may be required, adding significant lead time.",
+      "applies_to": ["vehicle_on_beach"],
+      "mandatory": true
+    },
+    {
+      "rule_id": "BEACH-DRONE-001",
+      "source": "FAA / LA County / FilmLA",
+      "summary": "Drone use over beaches requires Part 107 certification, LAANC airspace authorization, and FilmLA drone supplemental. Maintain 25-50 ft lateral distance from public. No flights over crowds without FAA waiver. Some beach areas are in LAX Class B airspace (restricted or prohibited).",
+      "applies_to": ["drone", "beach_filming"],
+      "mandatory": true,
+      "details": {
+        "public_lateral_distance_feet": "25-50",
+        "lax_airspace_restriction": true
+      }
+    }
+  ]
+}

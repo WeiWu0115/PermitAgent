@@ -1,0 +1,47 @@
+{
+  "source": "LADOT / LAMC Sections 44.05, 62.02, 80.01-80.09",
+  "last_updated": "2025-05",
+  "rules": [
+    {
+      "rule_id": "TRAFFIC-LANE-001",
+      "source": "LADOT / LAMC Section 62.02",
+      "summary": "Lane closures for filming require LADOT Temporary Traffic Control permit via FilmLA. Minimum 5 business days advance notice (10+ for major arterials). No rush hour closures on major arterials (7-9 AM, 4-7 PM weekdays). Must maintain emergency vehicle access.",
+      "applies_to": ["lane_closure", "street_closure", "car_chase", "vehicle_action"],
+      "mandatory": true,
+      "details": {
+        "standard_lead_time_days": 5,
+        "major_arterial_lead_time_days": 10,
+        "rush_hour_prohibited_am": "7:00-9:00 AM",
+        "rush_hour_prohibited_pm": "4:00-7:00 PM",
+        "emergency_access_required": true,
+        "freeway_requires_caltrans": true
+      }
+    },
+    {
+      "rule_id": "TRAFFIC-TCP-001",
+      "source": "LADOT / California MUTCD",
+      "summary": "A Traffic Control Plan (TCP) complying with California MUTCD must be submitted with the permit. Plans for major streets may need licensed traffic engineer review. Certified flaggers or LADOT officers required for any lane closure.",
+      "applies_to": ["lane_closure", "street_closure", "traffic_control"],
+      "mandatory": true,
+      "details": {
+        "ladot_officer_rate": "$75-$100/hour (4-hr minimum)",
+        "lapd_officer_rate": "$100-$150/hour",
+        "flagger_rate": "$50-$75/hour",
+        "traffic_engineer_review_for_major_streets": true
+      }
+    },
+    {
+      "rule_id": "TRAFFIC-PARKING-001",
+      "source": "LADOT / FilmLA / LAMC Section 80.69.4",
+      "summary": "Temporary no-parking signs for production vehicles must be posted 24 hours in advance (some locations 48-72 hours). LADOT-approved format required. Oversized vehicles (22+ ft) cannot park on residential streets without permit. Must not block driveways or fire hydrants (15 ft clearance).",
+      "applies_to": ["parking", "base_camp", "production_vehicles"],
+      "mandatory": true,
+      "details": {
+        "sign_posting_advance_hours": 24,
+        "oversized_vehicle_length_feet": 22,
+        "fire_hydrant_clearance_feet": 15,
+        "meter_bagging_requires_ladot_approval": true
+      }
+    }
+  ]
+}

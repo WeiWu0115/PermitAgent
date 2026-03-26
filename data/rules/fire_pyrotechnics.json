@@ -1,0 +1,80 @@
+{
+  "source": "LAMC Section 57.5706 / LAFD Film Unit / NFPA 1126",
+  "last_updated": "2025-05",
+  "rules": [
+    {
+      "rule_id": "FIRE-PYRO-001",
+      "source": "LAMC Section 56.02 / LAFD Film Unit",
+      "summary": "Any use of pyrotechnics, explosives, or blank-firing weapons requires an LAFD pyrotechnics permit. Licensed pyrotechnician with valid CA State Fire Marshal license required. Minimum 5 business days advance notice (10+ for complex effects).",
+      "applies_to": ["explosion", "pyro", "pyrotechnics", "blank_fire"],
+      "mandatory": true,
+      "details": {
+        "csfm_license_required": true,
+        "lead_time_days_standard": 5,
+        "lead_time_days_complex": 10,
+        "nfpa_compliance": "NFPA 1126"
+      }
+    },
+    {
+      "rule_id": "FIRE-FSO-001",
+      "source": "LAFD Film Unit",
+      "summary": "LAFD Fire Safety Officer required for: open flames, pyrotechnics, smoke/fog in enclosed spaces, fire stunts, brush area filming, Red Flag conditions, and large enclosed crowd scenes. Rate: $80-$110/hour, 4-hour minimum.",
+      "applies_to": ["fire", "flame", "candle", "pyro", "smoke", "fog", "crowd_indoor"],
+      "mandatory": true,
+      "details": {
+        "hourly_rate": "$80-$110",
+        "minimum_hours": 4,
+        "overtime_multiplier": 1.5,
+        "triggers": [
+          "Open flames or candles",
+          "Pyrotechnic effects",
+          "Smoke or fog in enclosed spaces",
+          "Fire stunts",
+          "Brush area filming",
+          "Red Flag conditions",
+          "Large crowds in enclosed spaces"
+        ]
+      }
+    },
+    {
+      "rule_id": "FIRE-SMOKE-001",
+      "source": "LAFD Film Unit / LAMC Section 57.4211",
+      "summary": "Theatrical fog/smoke machines require LAFD notification. In enclosed spaces: FSO presence required, fire alarm coordination with building management needed. Only approved glycol-based or glycerin-based fluids allowed. Petroleum-based products prohibited.",
+      "applies_to": ["smoke", "fog", "haze"],
+      "mandatory": true,
+      "details": {
+        "approved_fluids": ["glycol-based", "glycerin-based"],
+        "prohibited_fluids": ["petroleum-based"],
+        "fire_alarm_coordination_required": true,
+        "fso_required_indoors": true
+      }
+    },
+    {
+      "rule_id": "FIRE-FLAME-001",
+      "source": "LAFD Film Unit",
+      "summary": "Open flame on set (candles, fireplaces, torches, cooking, campfires) requires FSO on set. Fire extinguisher (2A:10BC minimum) within 75 feet. Non-combustible surfaces required. No flame within 10 feet of combustible set materials without FSO approval.",
+      "applies_to": ["fire", "flame", "candle", "torch", "fireplace"],
+      "mandatory": true,
+      "details": {
+        "fire_extinguisher_rating": "2A:10BC",
+        "extinguisher_distance_feet": 75,
+        "combustible_clearance_feet": 10,
+        "flames_must_be_attended": true
+      }
+    },
+    {
+      "rule_id": "FIRE-REDFLAG-001",
+      "source": "LAFD / National Weather Service",
+      "summary": "During Red Flag Warnings: all exterior pyrotechnics prohibited, exterior open flames prohibited or severely restricted, no smoking on exterior brush area sets. LAFD can suspend or revoke filming permits. Brush area filming requires 200 feet defensible space.",
+      "applies_to": ["pyro", "fire", "flame", "brush_area"],
+      "mandatory": true,
+      "details": {
+        "red_flag_season": "October-March (typical)",
+        "exterior_pyro_prohibited": true,
+        "exterior_flame_restricted": true,
+        "defensible_space_feet": 200,
+        "lafd_can_halt_production": true
+      }
+    }
+  ]
+}

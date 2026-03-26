@@ -1,0 +1,95 @@
+{
+  "source": "FilmLA / LAMC Chapter IV, Article 4 (Sections 44.00-44.10)",
+  "last_updated": "2025-05",
+  "rules": [
+    {
+      "rule_id": "FILMLA-PERMIT-001",
+      "source": "LAMC Section 44.01 / FilmLA",
+      "summary": "All commercial filming on public property in the City of Los Angeles requires a FilmLA Master Permit. Applications submitted online via filmla.com.",
+      "applies_to": ["all_filming"],
+      "mandatory": true,
+      "details": {
+        "base_fee_day1": "$625",
+        "additional_day_fee": "$300-$400/day",
+        "student_film_rate": "$100-$200/day",
+        "still_photography_rate": "$300-$400",
+        "rush_processing_fee": "$250-$500",
+        "standard_lead_time_days": 5,
+        "rush_lead_time_days": 3,
+        "complex_lead_time_days": 15,
+        "freeway_lead_time_days": 30
+      }
+    },
+    {
+      "rule_id": "FILMLA-INSURANCE-001",
+      "source": "LAMC Section 44.03 / FilmLA Insurance Requirements",
+      "summary": "Productions must carry minimum $1M general liability ($2M aggregate), $1M auto liability, and statutory workers' comp. City of LA must be named as additional insured.",
+      "applies_to": ["all_filming"],
+      "mandatory": true,
+      "details": {
+        "general_liability_per_occurrence": "$1,000,000",
+        "general_liability_aggregate": "$2,000,000",
+        "auto_liability": "$1,000,000",
+        "workers_comp": "statutory (CA law)",
+        "employers_liability": "$1,000,000",
+        "umbrella_high_risk": "$5,000,000 to $10,000,000",
+        "aircraft_liability": "$5,000,000"
+      }
+    },
+    {
+      "rule_id": "FILMLA-NOTIFY-001",
+      "source": "LAMC Section 44.08 / FilmLA Notification Guidelines",
+      "summary": "Productions must notify all residences and businesses within 500 feet at least 24 hours in advance (72 hours recommended). Notification must include company name, permit number, dates/times, activity description, and 24-hour contact number.",
+      "applies_to": ["all_filming"],
+      "mandatory": true,
+      "details": {
+        "notification_radius_feet": 500,
+        "minimum_advance_hours": 24,
+        "recommended_advance_hours": 72,
+        "required_content": [
+          "Production company name and contact info",
+          "FilmLA permit number",
+          "Filming dates, times, and locations",
+          "Description of anticipated activity",
+          "24-hour contact phone number",
+          "FilmLA complaint hotline number"
+        ]
+      }
+    },
+    {
+      "rule_id": "FILMLA-HOURS-001",
+      "source": "LAMC Section 44.05 / FilmLA Filming Hours",
+      "summary": "Residential areas: filming allowed 7 AM-10 PM weekdays, 8 AM-10 PM Saturday, 10 AM-10 PM Sunday. No overnight exterior filming without council office approval. Generators and exterior lighting off during quiet hours.",
+      "applies_to": ["residential_filming", "night_shoot"],
+      "mandatory": true,
+      "details": {
+        "residential_weekday_start": "7:00 AM",
+        "residential_weekday_end": "10:00 PM",
+        "residential_saturday_start": "8:00 AM",
+        "residential_sunday_start": "10:00 AM",
+        "residential_weekend_end": "10:00 PM",
+        "commercial_start": "7:00 AM",
+        "commercial_end": "10:00 PM to midnight",
+        "load_unload_before_start": "1 hour"
+      }
+    },
+    {
+      "rule_id": "FILMLA-NOPERMIT-001",
+      "source": "LAMC Section 44.09",
+      "summary": "Filming without a permit is a misdemeanor. Fine up to $1,000 per day and/or up to 6 months in jail.",
+      "applies_to": ["all_filming"],
+      "mandatory": true,
+      "details": {
+        "fine_per_day": "$1,000",
+        "max_jail_time": "6 months"
+      }
+    },
+    {
+      "rule_id": "FILMLA-INDEMNIFY-001",
+      "source": "LAMC Section 44.06",
+      "summary": "Permittee must indemnify and hold harmless the City of Los Angeles from any claims arising from the permitted activity.",
+      "applies_to": ["all_filming"],
+      "mandatory": true
+    }
+  ]
+}

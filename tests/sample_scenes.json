@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Street Night Shooting",
+    "scene_text": "EXT. DOWNTOWN LOS ANGELES - NIGHT. Detective Cruz walks down a rain-slicked street, passing neon signs. She spots the suspect ducking into an alley. A police cruiser screeches to a halt at the corner. 20 extras mill around as bystanders.",
+    "location": "Spring Street, Downtown Los Angeles, CA",
+    "notes": "Night shoot. Wet-down required for rain effect. 20 extras as pedestrians."
+  },
+  {
+    "name": "Park Dialogue",
+    "scene_text": "EXT. GRIFFITH PARK - DAY. Maya and Jordan sit on a bench overlooking the city. A dog walker passes with three golden retrievers. They argue quietly about the letter. Birds chirp in the background.",
+    "location": "Griffith Park, Los Angeles, CA",
+    "notes": "Simple dialogue scene. Minimal crew. Two actors, natural light."
+  },
+  {
+    "name": "Drone Beach Shot",
+    "scene_text": "EXT. VENICE BEACH - SUNSET. A drone rises over the boardwalk capturing the golden hour light. Below, 50 extras jog, skate, and dance along the waterfront. The camera pushes in on a lone surfer paddling out.",
+    "location": "Venice Beach, Los Angeles, CA",
+    "notes": "Drone operator certified. Sunset golden hour window is approximately 45 minutes."
+  },
+  {
+    "name": "Prop Weapon Scene",
+    "scene_text": "INT. ABANDONED WAREHOUSE - NIGHT. Marcus pulls a pistol from his waistband and slides it across the table. The rival gang leader picks up a rifle leaning against the wall. Smoke drifts through the broken windows. 8 actors in the scene.",
+    "location": "Arts District, Los Angeles, CA",
+    "notes": "All weapons are non-firing replicas. Smoke machine for atmosphere. Weapons handler on set."
+  },
+  {
+    "name": "Small Indoor Shoot",
+    "scene_text": "INT. COFFEE SHOP - DAY. Emily types on her laptop. The barista calls her name. She walks to the counter, picks up her latte, and returns to her seat. Background music plays softly.",
+    "location": "Silver Lake, Los Angeles, CA",
+    "notes": "Small crew of 6. Private location secured. No permits expected beyond standard FilmLA."
+  }
+]

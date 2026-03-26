@@ -1,0 +1,55 @@
+{
+  "source": "LAMC Sections 55.07, 55.10, 56.02 / California Penal Code / FilmLA Weapons Supplemental",
+  "last_updated": "2025-05",
+  "rules": [
+    {
+      "rule_id": "WEAPON-FIREARM-001",
+      "source": "LAMC Section 55.07 / FilmLA Weapons Supplemental",
+      "summary": "All prop firearms (blank-firing and replica) require a FilmLA Weapons Supplemental permit. LAPD must be notified in advance. A licensed armorer must be on set. Blank-firing weapons require additional safety coordination.",
+      "applies_to": ["gun", "rifle", "pistol", "firearm", "blank_fire"],
+      "mandatory": true,
+      "details": {
+        "lapd_advance_notice": true,
+        "lapd_officer_required": true,
+        "licensed_armorer_required": true,
+        "lead_time_days": 5,
+        "safety_briefing_required": true
+      }
+    },
+    {
+      "rule_id": "WEAPON-REPLICA-001",
+      "source": "LAMC Section 55.10 / CA Penal Code Section 20165",
+      "summary": "Replica and imitation firearms visible from public areas require mandatory LAPD presence. California Penal Code provides exemption for licensed productions but SB 199 orange tip waiver applies only to permitted productions.",
+      "applies_to": ["replica_weapon", "prop_gun"],
+      "mandatory": true,
+      "details": {
+        "lapd_presence_required_if_public_visible": true,
+        "ca_penal_code_exemption": "Section 20165"
+      }
+    },
+    {
+      "rule_id": "WEAPON-SCHOOL-001",
+      "source": "California Law / LAPD Policy / FilmLA",
+      "summary": "Realistic-looking firearms used within 1,000 feet of a school (K-12) trigger mandatory LAPD notification and typically require an LAPD officer on set. Some productions film with weapons only when school is not in session.",
+      "applies_to": ["gun", "rifle", "pistol", "firearm", "replica_weapon"],
+      "mandatory": true,
+      "details": {
+        "school_buffer_feet": 1000,
+        "lapd_notification_required": true,
+        "lapd_officer_on_set": true,
+        "recommendation": "Film during non-school hours when possible"
+      }
+    },
+    {
+      "rule_id": "WEAPON-EDGED-001",
+      "source": "FilmLA Guidelines",
+      "summary": "Edged weapons (knives, swords) require notation on the FilmLA permit and a safety coordinator on set. Lower risk than firearms but still requires documentation.",
+      "applies_to": ["knife", "sword", "edged_weapon"],
+      "mandatory": true,
+      "details": {
+        "safety_coordinator_required": true,
+        "permit_notation_required": true
+      }
+    }
+  ]
+}

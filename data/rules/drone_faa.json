@@ -1,0 +1,86 @@
+{
+  "source": "14 CFR Part 107 / FAA / FilmLA Drone Supplemental",
+  "last_updated": "2025-05",
+  "rules": [
+    {
+      "rule_id": "DRONE-PART107-001",
+      "source": "14 CFR Part 107",
+      "summary": "All commercial drone operations require FAA Part 107 Remote Pilot Certificate. Pilot must pass aeronautical knowledge test, be 16+ years old, and TSA vetted. Certificate valid 24 months.",
+      "applies_to": ["drone", "uas"],
+      "mandatory": true,
+      "details": {
+        "test_fee": "$175",
+        "certificate_validity_months": 24,
+        "minimum_age": 16,
+        "max_takeoff_weight_lbs": 55,
+        "max_altitude_feet": 400,
+        "max_speed_mph": 100,
+        "min_visibility_miles": 3,
+        "visual_line_of_sight_required": true
+      }
+    },
+    {
+      "rule_id": "DRONE-AIRSPACE-001",
+      "source": "FAA / LAANC",
+      "summary": "Much of LA is controlled airspace (LAX Class B, Van Nuys Class D, Burbank Class C). Drone operations require LAANC authorization or manual FAA airspace authorization. Many grid cells near LAX have 0-foot ceiling (no drone ops at any altitude). Manual authorization takes up to 90 days.",
+      "applies_to": ["drone", "uas"],
+      "mandatory": true,
+      "details": {
+        "lax_airspace_class": "B",
+        "laanc_authorization": "near-instant (automated)",
+        "manual_authorization_days": 90,
+        "zero_ceiling_zones": "Many cells near LAX"
+      }
+    },
+    {
+      "rule_id": "DRONE-FILMLA-001",
+      "source": "FilmLA Drone Supplemental / LAMC Section 56.31",
+      "summary": "FilmLA Drone Supplemental permit required. LAPD Air Support Division notification required. Insurance minimum $5M aircraft liability. No flights over uninvolved persons without FAA waiver. Lead time 10+ business days.",
+      "applies_to": ["drone", "uas"],
+      "mandatory": true,
+      "details": {
+        "filmla_supplemental_required": true,
+        "lapd_air_support_notification": true,
+        "aircraft_insurance_minimum": "$5,000,000",
+        "no_flight_over_uninvolved_persons": true,
+        "lead_time_days": 10
+      }
+    },
+    {
+      "rule_id": "DRONE-NIGHT-001",
+      "source": "14 CFR Part 107.29 (updated April 2021)",
+      "summary": "Night drone operations permitted without waiver since April 2021. Drone must have anti-collision lighting visible for 3 statute miles. Pilot must complete updated night operations training.",
+      "applies_to": ["drone", "uas", "night_shoot"],
+      "mandatory": true,
+      "details": {
+        "anti_collision_lighting_visibility_miles": 3,
+        "night_training_required": true
+      }
+    },
+    {
+      "rule_id": "DRONE-PEOPLE-001",
+      "source": "14 CFR Part 107.39 / Operations Over People Rule (April 2021)",
+      "summary": "Flying over people requires drone to meet Category 1-4 specifications. Category 1: drones under 0.55 lbs. Category 2-4: require FAA Declaration of Compliance. Operations over open-air assemblies restricted for Cat 3.",
+      "applies_to": ["drone", "uas", "crowd"],
+      "mandatory": true
+    },
+    {
+      "rule_id": "DRONE-REMOTEID-001",
+      "source": "14 CFR Part 89 (effective March 16, 2024)",
+      "summary": "All drones must comply with Remote ID rules — either built-in broadcast module or operating within an FAA-Recognized Identification Area.",
+      "applies_to": ["drone", "uas"],
+      "mandatory": true
+    },
+    {
+      "rule_id": "DRONE-WAIVER-001",
+      "source": "FAA DroneZone",
+      "summary": "Waivers for operations over moving vehicles (107.39), beyond visual line of sight (107.31), above 400 ft (107.51), or near other aircraft (107.37) require application via FAA DroneZone. Processing takes 90-120 days. Valid up to 4 years.",
+      "applies_to": ["drone", "uas"],
+      "mandatory": true,
+      "details": {
+        "processing_time_days": "90-120",
+        "waiver_validity_years": 4
+      }
+    }
+  ]
+}
