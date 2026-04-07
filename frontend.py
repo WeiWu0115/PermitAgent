@@ -386,10 +386,18 @@ st.markdown("""
         border-top-color: #0071e3 !important;
     }
 
-    /* Hide Streamlit branding */
+    /* Hide Streamlit branding but keep sidebar toggle */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
+    [data-testid="collapsedControl"] {
+        visibility: visible !important;
+        color: #1d1d1f !important;
+    }
+    [data-testid="stSidebarCollapsedControl"] {
+        visibility: visible !important;
+        color: #1d1d1f !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
