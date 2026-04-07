@@ -386,14 +386,9 @@ st.markdown("""
         border-top-color: #0071e3 !important;
     }
 
-    /* Hide Streamlit branding */
-    #MainMenu {visibility: hidden;}
+    /* Hide only footer branding */
     footer {visibility: hidden;}
-    [data-testid="stHeader"] {display: none;}
-    [data-testid="stToolbar"] {display: none;}
-    /* Keep sidebar toggle visible */
-    [data-testid="collapsedControl"] {display: flex !important;}
-    [data-testid="stSidebarCollapsedControl"] {display: flex !important;}
+    #MainMenu {visibility: hidden;}
 </style>
 """, unsafe_allow_html=True)
 
