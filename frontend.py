@@ -1,11 +1,11 @@
 """
 frontend.py — Streamlit frontend for PermitAgent.
 
-Visual style inspired by FilmLA.com:
-- Dark navy palette (#10131b, #202535, #3f4a6a)
-- Cyan blue (#009cde) and lime green (#97d700) accents
-- Nunito Sans typography
-- Professional, institutional look
+Visual style inspired by Apple Human Interface Guidelines:
+- Light palette (#f5f5f7, #ffffff, #000000 for hero)
+- Single accent: Apple Blue (#0071e3) reserved for interactive elements
+- SF Pro system font stack
+- Clean, minimal, gallery-like spacing
 """
 
 import sys
@@ -88,280 +88,302 @@ st.set_page_config(
 )
 
 # ---------------------------------------------------------------------------
-# Custom CSS — FilmLA-inspired theme
+# Custom CSS — Apple-inspired design
 # ---------------------------------------------------------------------------
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap');
-
-    /* === Global === */
+    /* === Global — SF Pro system font === */
     html, body, [class*="css"] {
-        font-family: 'Nunito Sans', sans-serif;
+        font-family: -apple-system, "SF Pro Text", "SF Pro Display", BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
     }
 
     /* === Main background === */
     .stApp {
-        background-color: #10131b;
-        color: #ffffff;
+        background-color: #f5f5f7;
+        color: #1d1d1f;
     }
 
     /* === Sidebar === */
     section[data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #202535 0%, #10131b 100%);
-        border-right: 2px solid #3f4a6a;
+        background-color: #ffffff;
+        border-right: 1px solid rgba(0,0,0,0.1);
     }
     section[data-testid="stSidebar"] .stMarkdown p,
     section[data-testid="stSidebar"] .stMarkdown li,
     section[data-testid="stSidebar"] label {
-        color: #e0e0e0 !important;
+        color: #1d1d1f !important;
     }
     section[data-testid="stSidebar"] .stSelectbox label,
     section[data-testid="stSidebar"] .stTextArea label,
     section[data-testid="stSidebar"] .stTextInput label {
-        color: #009cde !important;
-        font-weight: 700;
-        text-transform: uppercase;
-        font-size: 0.75em;
-        letter-spacing: 1px;
+        color: rgba(0,0,0,0.56) !important;
+        font-weight: 600;
+        font-size: 0.8em;
+        letter-spacing: -0.1px;
     }
 
     /* === Headings === */
     h1 {
-        color: #ffffff !important;
-        font-weight: 900 !important;
-        letter-spacing: -0.5px;
+        color: #1d1d1f !important;
+        font-weight: 600 !important;
+        letter-spacing: -0.28px;
+        line-height: 1.07;
     }
     h2, h3 {
-        color: #009cde !important;
-        font-weight: 900 !important;
+        color: #1d1d1f !important;
+        font-weight: 600 !important;
+        letter-spacing: -0.2px;
     }
     h4, h5 {
-        color: #97d700 !important;
-        font-weight: 700 !important;
+        color: #1d1d1f !important;
+        font-weight: 600 !important;
     }
 
     /* === Tabs === */
     .stTabs [data-baseweb="tab-list"] {
-        background-color: #202535;
+        background-color: rgba(0,0,0,0.06);
         border-radius: 8px;
         padding: 4px;
-        gap: 4px;
+        gap: 2px;
     }
     .stTabs [data-baseweb="tab"] {
-        color: #9fa4b4;
-        font-weight: 700;
+        color: rgba(0,0,0,0.56);
+        font-weight: 500;
         font-size: 0.85em;
         border-radius: 6px;
-        padding: 8px 16px;
+        padding: 7px 14px;
         background-color: transparent;
+        letter-spacing: -0.1px;
     }
     .stTabs [aria-selected="true"] {
-        color: #ffffff !important;
-        background-color: #3f4a6a !important;
-        border-bottom: 3px solid #009cde !important;
+        color: #1d1d1f !important;
+        background-color: #ffffff !important;
+        border-bottom: none !important;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12) !important;
     }
     .stTabs [data-baseweb="tab"]:hover {
-        color: #97d700;
+        color: #1d1d1f;
     }
     .stTabs [data-baseweb="tab-panel"] {
-        background-color: #1a1e2e;
+        background-color: #f5f5f7;
         border-radius: 0 0 8px 8px;
-        padding: 20px;
+        padding: 20px 4px;
     }
 
     /* === Metrics === */
     [data-testid="stMetric"] {
-        background: linear-gradient(135deg, #202535, #2a2f45);
-        border: 1px solid #3f4a6a;
-        border-radius: 8px;
-        padding: 16px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.08);
     }
     [data-testid="stMetricLabel"] {
-        color: #9fa4b4 !important;
-        font-weight: 700;
-        text-transform: uppercase;
-        font-size: 0.7em !important;
-        letter-spacing: 1px;
+        color: rgba(0,0,0,0.48) !important;
+        font-weight: 500;
+        font-size: 0.75em !important;
+        letter-spacing: -0.1px;
     }
     [data-testid="stMetricValue"] {
-        color: #009cde !important;
-        font-weight: 900 !important;
-        font-size: 1.8em !important;
+        color: #1d1d1f !important;
+        font-weight: 600 !important;
+        font-size: 1.6em !important;
+        letter-spacing: -0.2px;
     }
 
     /* === Expanders === */
     .streamlit-expanderHeader {
-        background-color: #202535 !important;
-        border: 1px solid #3f4a6a !important;
-        border-radius: 6px !important;
-        color: #ffffff !important;
-        font-weight: 600 !important;
+        background-color: #ffffff !important;
+        border: none !important;
+        border-radius: 8px !important;
+        color: #1d1d1f !important;
+        font-weight: 500 !important;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.08) !important;
     }
     .streamlit-expanderHeader:hover {
-        border-color: #009cde !important;
-        color: #97d700 !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.12) !important;
     }
     .streamlit-expanderContent {
-        background-color: #1a1e2e !important;
-        border: 1px solid #3f4a6a !important;
-        border-top: none !important;
-        border-radius: 0 0 6px 6px !important;
+        background-color: #ffffff !important;
+        border: none !important;
+        border-radius: 0 0 8px 8px !important;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.06) !important;
     }
 
     /* === Buttons === */
     .stButton > button {
-        background: linear-gradient(90deg, #009cde, #97d700) !important;
-        color: #10131b !important;
-        font-weight: 900 !important;
-        text-transform: uppercase !important;
-        letter-spacing: 1px !important;
+        background-color: #0071e3 !important;
+        color: #ffffff !important;
+        font-weight: 400 !important;
+        letter-spacing: -0.224px !important;
         border: none !important;
-        border-radius: 6px !important;
-        padding: 12px 24px !important;
-        font-size: 1em !important;
-        transition: all 0.3s ease !important;
+        border-radius: 980px !important;
+        padding: 12px 22px !important;
+        font-size: 0.95em !important;
+        transition: background-color 0.2s ease !important;
     }
     .stButton > button:hover {
-        background: linear-gradient(90deg, #97d700, #009cde) !important;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 15px rgba(0, 156, 222, 0.4) !important;
+        background-color: #0077ed !important;
+        box-shadow: none !important;
+        transform: none !important;
     }
 
     /* === Progress bar === */
     .stProgress > div > div {
-        background: linear-gradient(90deg, #009cde, #97d700) !important;
+        background-color: #0071e3 !important;
     }
     .stProgress {
-        background-color: #3f4a6a;
+        background-color: rgba(0,0,0,0.1) !important;
+        border-radius: 4px;
     }
 
     /* === Info/Warning/Success boxes === */
     .stAlert {
-        background-color: #202535 !important;
-        border-radius: 6px !important;
+        background-color: #ffffff !important;
+        border-radius: 8px !important;
+        border: none !important;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.08) !important;
     }
 
     /* === JSON viewer === */
     [data-testid="stJson"] {
-        background-color: #202535 !important;
-        border-radius: 8px;
+        background-color: #ffffff !important;
+        border-radius: 12px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     }
 
     /* === Dividers === */
     hr {
-        border-color: #3f4a6a !important;
+        border-color: rgba(0,0,0,0.1) !important;
     }
 
     /* === Text styling === */
     .stMarkdown p {
-        color: #e0e0e0;
-        line-height: 1.6;
+        color: #1d1d1f;
+        line-height: 1.47;
+        letter-spacing: -0.374px;
     }
     .stMarkdown strong {
-        color: #ffffff;
+        color: #1d1d1f;
+        font-weight: 600;
     }
     .stMarkdown li {
-        color: #e0e0e0;
+        color: #1d1d1f;
     }
     .stCaption {
-        color: #9fa4b4 !important;
+        color: rgba(0,0,0,0.48) !important;
+        font-size: 0.85em !important;
     }
 
     /* === Custom card class === */
     .permit-card {
-        background: linear-gradient(135deg, #202535, #2a2f45);
-        border: 1px solid #3f4a6a;
-        border-radius: 10px;
-        padding: 20px;
-        margin: 10px 0;
+        background-color: #ffffff;
+        border-radius: 12px;
+        padding: 20px 22px;
+        margin: 8px 0;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.08);
     }
-    .permit-card:hover {
-        border-color: #009cde;
+    .permit-card h4 {
+        color: #1d1d1f !important;
+        font-size: 1em;
+        font-weight: 600;
+        letter-spacing: -0.1px;
     }
+    .permit-card p {
+        color: #1d1d1f;
+        font-size: 0.95em;
+    }
+
+    /* === Risk badges === */
     .risk-badge {
         display: inline-block;
-        padding: 4px 12px;
-        border-radius: 20px;
-        font-weight: 700;
-        font-size: 0.85em;
-        text-transform: uppercase;
-        letter-spacing: 1px;
+        padding: 3px 10px;
+        border-radius: 980px;
+        font-weight: 500;
+        font-size: 0.8em;
+        letter-spacing: -0.1px;
     }
-    .risk-low { background-color: #008009; color: #ffffff; }
-    .risk-medium { background-color: #ffb81c; color: #10131b; }
-    .risk-high { background-color: #aa1609; color: #ffffff; }
-    .risk-critical { background-color: #a50050; color: #ffffff; }
+    .risk-low { background-color: rgba(52,199,89,0.15); color: #1a7f37; }
+    .risk-medium { background-color: rgba(255,149,0,0.15); color: #b25000; }
+    .risk-high { background-color: rgba(255,59,48,0.15); color: #c0392b; }
+    .risk-critical { background-color: rgba(175,82,222,0.15); color: #7b2fa6; }
 
+    /* === Stat numbers === */
     .stat-number {
-        font-size: 3em;
-        font-weight: 900;
-        color: #009cde;
+        font-size: 2.8em;
+        font-weight: 600;
+        color: #1d1d1f;
         line-height: 1;
+        letter-spacing: -0.5px;
     }
     .stat-label {
-        color: #9fa4b4;
-        font-size: 0.8em;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        font-weight: 700;
+        color: rgba(0,0,0,0.48);
+        font-size: 0.75em;
+        letter-spacing: -0.1px;
+        font-weight: 400;
+        margin-top: 4px;
     }
 
     /* === Hero banner === */
     .hero-banner {
-        background: linear-gradient(135deg, #202535 0%, #3f4a6a 50%, #47819a 100%);
-        border-radius: 12px;
-        padding: 40px 30px;
-        margin-bottom: 20px;
+        background-color: #000000;
+        border-radius: 18px;
+        padding: 56px 40px;
+        margin-bottom: 24px;
         text-align: center;
     }
     .hero-banner h1 {
-        font-size: 2.5em !important;
+        font-size: 2.8em !important;
+        font-weight: 600 !important;
+        color: #f5f5f7 !important;
+        letter-spacing: -0.28px;
         margin-bottom: 0 !important;
-        text-shadow: 3px 3px 0 #009cde;
     }
     .hero-banner p {
-        color: #9fa4b4;
-        font-size: 1.1em;
-        margin-top: 8px;
+        color: rgba(255,255,255,0.72);
+        font-size: 1em;
+        margin-top: 10px;
+        letter-spacing: -0.2px;
+        line-height: 1.47;
     }
 
     /* === Pipeline flow === */
     .pipeline-step {
         display: inline-block;
-        background-color: #3f4a6a;
-        color: #ffffff;
-        padding: 6px 14px;
-        border-radius: 20px;
-        font-weight: 700;
+        background-color: #1d1d1f;
+        color: #f5f5f7;
+        padding: 5px 13px;
+        border-radius: 980px;
+        font-weight: 400;
         font-size: 0.8em;
         margin: 3px;
+        letter-spacing: -0.1px;
     }
     .pipeline-arrow {
         display: inline-block;
-        color: #97d700;
-        font-weight: 900;
-        font-size: 1.2em;
-        margin: 0 4px;
+        color: rgba(0,0,0,0.3);
+        font-size: 1em;
+        margin: 0 3px;
     }
 
     /* === Selectbox / inputs === */
     .stSelectbox > div > div,
     .stTextArea > div > div > textarea,
     .stTextInput > div > div > input {
-        background-color: #202535 !important;
-        color: #ffffff !important;
-        border: 1px solid #3f4a6a !important;
-        border-radius: 6px !important;
+        background-color: #ffffff !important;
+        color: #1d1d1f !important;
+        border: 1px solid rgba(0,0,0,0.2) !important;
+        border-radius: 11px !important;
     }
     .stTextArea > div > div > textarea:focus,
     .stTextInput > div > div > input:focus {
-        border-color: #009cde !important;
-        box-shadow: 0 0 0 1px #009cde !important;
+        border-color: #0071e3 !important;
+        box-shadow: 0 0 0 3px rgba(0,113,227,0.2) !important;
     }
 
     /* === Spinner === */
     .stSpinner > div {
-        border-top-color: #009cde !important;
+        border-top-color: #0071e3 !important;
     }
 
     /* Hide Streamlit branding */
@@ -377,11 +399,11 @@ st.markdown("""
 # ---------------------------------------------------------------------------
 with st.sidebar:
     st.markdown("""
-    <div style="text-align: center; padding: 10px 0 20px 0;">
-        <h1 style="font-size: 1.8em; margin: 0; text-shadow: 2px 2px 0 #009cde;">
-            🎬 PERMIT<span style="color: #97d700;">AGENT</span>
-        </h1>
-        <p style="color: #9fa4b4; font-size: 0.75em; text-transform: uppercase; letter-spacing: 2px; margin-top: 4px;">
+    <div style="text-align: center; padding: 16px 0 20px 0;">
+        <div style="font-size: 1.6em; font-weight: 600; color: #1d1d1f; letter-spacing: -0.3px; line-height: 1.1;">
+            PermitAgent
+        </div>
+        <p style="color: rgba(0,0,0,0.48); font-size: 0.78em; letter-spacing: -0.1px; margin-top: 4px;">
             Film Permit Intelligence System
         </p>
     </div>
@@ -489,9 +511,9 @@ with st.sidebar:
             uploaded_text = _parse_uploaded_file(uploaded_file)
             if uploaded_text:
                 st.markdown(f"""
-                <div style="background: #202535; border: 1px solid #97d700; border-radius: 6px; padding: 8px 12px; margin: 5px 0;">
-                    <span style="color: #97d700; font-weight: 700;">✓</span>
-                    <span style="color: #e0e0e0; font-size: 0.85em;">
+                <div style="background: rgba(52,199,89,0.1); border-radius: 8px; padding: 8px 12px; margin: 5px 0;">
+                    <span style="color: #1a7f37; font-weight: 600;">✓</span>
+                    <span style="color: #1d1d1f; font-size: 0.85em;">
                         Loaded <strong>{uploaded_file.name}</strong> — {len(uploaded_text)} characters
                     </span>
                 </div>
@@ -526,9 +548,9 @@ with st.sidebar:
     st.markdown("---")
     st.markdown("""
     <div style="text-align: center; padding: 10px 0;">
-        <p style="color: #9fa4b4; font-size: 0.7em;">
+        <p style="color: rgba(0,0,0,0.4); font-size: 0.72em; letter-spacing: -0.1px;">
             Powered by GPT-4o + Google Maps<br>
-            <span style="color: #3f4a6a;">v0.3.0 — Research Prototype</span>
+            v0.3.0 — Research Prototype
         </p>
     </div>
     """, unsafe_allow_html=True)
@@ -541,7 +563,7 @@ if not analyze_btn and not script_btn:
     # Hero banner
     st.markdown("""
     <div class="hero-banner">
-        <h1>🎬 PERMIT<span style="color: #97d700;">AGENT</span></h1>
+        <h1>PermitAgent</h1>
         <p>Multi-Agent System for Narrative-to-Bureaucratic Alignment in Film Production</p>
     </div>
     """, unsafe_allow_html=True)
@@ -550,18 +572,18 @@ if not analyze_btn and not script_btn:
     st.markdown("#### Pipeline Architecture")
     st.markdown("""
     <div style="text-align: center; padding: 20px 0;">
-        <span class="pipeline-step">📋 Scene Breakdown</span>
+        <span class="pipeline-step">Scene Breakdown</span>
         <span class="pipeline-arrow">→</span>
-        <span class="pipeline-step">🌍 Environment</span>
-        <span style="color: #97d700; font-weight: 700;"> + </span>
-        <span class="pipeline-step">⚠️ Exposures</span>
-        <span style="color: #9fa4b4; font-size: 0.7em;">(parallel)</span>
+        <span class="pipeline-step">Environment</span>
+        <span style="color: rgba(0,0,0,0.3); font-size: 0.9em;"> + </span>
+        <span class="pipeline-step">Exposures</span>
+        <span style="color: rgba(0,0,0,0.3); font-size: 0.75em; margin: 0 4px;">(parallel)</span>
         <span class="pipeline-arrow">→</span>
-        <span class="pipeline-step">📖 Rules</span>
+        <span class="pipeline-step">Rules</span>
         <span class="pipeline-arrow">→</span>
-        <span class="pipeline-step">📝 Compliance</span>
+        <span class="pipeline-step">Compliance</span>
         <span class="pipeline-arrow">→</span>
-        <span class="pipeline-step">🎲 Simulation</span>
+        <span class="pipeline-step">Simulation</span>
     </div>
     """, unsafe_allow_html=True)
 
@@ -594,7 +616,7 @@ if not analyze_btn and not script_btn:
     st.markdown("")
     st.markdown("""
     <div style="text-align: center; padding: 20px 0;">
-        <p style="color: #9fa4b4;">👈 Select a sample scene or paste a full screenplay in the sidebar, then click <strong style="color: #97d700;">ANALYZE</strong>.</p>
+        <p style="color: rgba(0,0,0,0.48);">Select a sample scene or paste a full screenplay in the sidebar, then click <strong style="color: #0071e3;">Analyze</strong>.</p>
     </div>
     """, unsafe_allow_html=True)
     st.stop()
@@ -626,11 +648,11 @@ if script_btn and script_text.strip():
 
     # --- Script Summary Header ---
     feas_pct = int(sm.average_feasibility * 100)
-    feas_color = "#97d700" if sm.average_feasibility >= 0.7 else "#ffb81c" if sm.average_feasibility >= 0.5 else "#aa1609"
+    feas_color = "#1a7f37" if sm.average_feasibility >= 0.7 else "#b25000" if sm.average_feasibility >= 0.5 else "#c0392b"
     risk_css = risk_colors_css.get(sm.highest_risk.value, "risk-medium")
 
     st.markdown(f"""
-    <div style="background: linear-gradient(135deg, #202535, #3f4a6a); border-radius: 12px; padding: 25px; margin: 15px 0;">
+    <div style="background-color: #ffffff; border-radius: 16px; padding: 28px; margin: 15px 0; box-shadow: 0 2px 16px rgba(0,0,0,0.08);">
         <div style="display: flex; justify-content: space-around; text-align: center; flex-wrap: wrap; gap: 15px;">
             <div>
                 <div class="stat-number">{sm.total_scenes}</div>
@@ -662,9 +684,9 @@ if script_btn and script_text.strip():
 
     # --- Recommendation ---
     st.markdown(f"""
-    <div class="permit-card" style="border-color: {feas_color};">
+    <div class="permit-card">
         <h4 style="margin-top: 0;">Overall Recommendation</h4>
-        <p style="font-size: 1.05em;">{sm.overall_recommendation}</p>
+        <p style="font-size: 1em;">{sm.overall_recommendation}</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -682,14 +704,14 @@ if script_btn and script_text.strip():
             st.markdown("#### High-Risk Scenes")
             for hrs in sm.high_risk_scenes:
                 st.markdown(f"""
-                <div class="permit-card" style="border-color: #aa1609;">
-                    <span style="color: #aa1609; font-weight: 700;">🔴</span> {hrs}
+                <div class="permit-card" style="border-left: 3px solid #ff3b30;">
+                    <span style="color: #c0392b; font-weight: 600;">High Risk</span>&ensp;{hrs}
                 </div>
                 """, unsafe_allow_html=True)
         else:
             st.markdown("""
-            <div class="permit-card" style="border-color: #008009;">
-                <p style="color: #97d700; font-weight: 700;">✓ No high-risk scenes detected.</p>
+            <div class="permit-card" style="border-left: 3px solid #34c759;">
+                <p style="color: #1a7f37; font-weight: 500; margin: 0;">No high-risk scenes detected.</p>
             </div>
             """, unsafe_allow_html=True)
 
@@ -705,12 +727,12 @@ if script_btn and script_text.strip():
             <div class="permit-card">
                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
                     <div>
-                        <span style="color: #009cde; font-weight: 900;">#{ps.scene_number}</span>
-                        <span style="font-weight: 700; margin-left: 8px;">{ps.slug_line}</span>
+                        <span style="color: rgba(0,0,0,0.4); font-size: 0.82em; font-weight: 500;">#{ps.scene_number}</span>
+                        <span style="font-weight: 500; margin-left: 8px; color: #1d1d1f;">{ps.slug_line}</span>
                     </div>
                     <div style="display: flex; gap: 10px; align-items: center;">
-                        <span style="color: #9fa4b4; font-size: 0.85em;">{exp_count} exposures</span>
-                        <span style="color: #9fa4b4; font-size: 0.85em;">Feas: {feas_val}</span>
+                        <span style="color: rgba(0,0,0,0.48); font-size: 0.82em;">{exp_count} exposures</span>
+                        <span style="color: rgba(0,0,0,0.48); font-size: 0.82em;">Feas: {feas_val}</span>
                         <span class="risk-badge {risk_badge}">{risk_val}</span>
                     </div>
                 </div>
@@ -748,7 +770,7 @@ if script_btn and script_text.strip():
     with stab3:
         col1, col2 = st.columns(2)
         with col1:
-            permits_html = "".join(f'<li style="margin: 6px 0;"><span style="color: #97d700;">✓</span> {p}</li>' for p in sm.unique_permits_required)
+            permits_html = "".join(f'<li style="margin: 6px 0; color: #1d1d1f;"><span style="color: #1a7f37;">✓</span> {p}</li>' for p in sm.unique_permits_required)
             st.markdown(f"""
             <div class="permit-card">
                 <h4 style="margin-top:0;">All Required Permits ({len(sm.unique_permits_required)})</h4>
@@ -756,7 +778,7 @@ if script_btn and script_text.strip():
             </div>
             """, unsafe_allow_html=True)
 
-            ins_html = "".join(f'<li style="margin: 6px 0;"><span style="color: #009cde;">🛡</span> {i}</li>' for i in sm.unique_insurance)
+            ins_html = "".join(f'<li style="margin: 6px 0; color: #1d1d1f;"><span style="color: #0071e3;">✦</span> {i}</li>' for i in sm.unique_insurance)
             st.markdown(f"""
             <div class="permit-card">
                 <h4 style="margin-top:0;">Insurance Requirements</h4>
@@ -765,7 +787,7 @@ if script_btn and script_text.strip():
             """, unsafe_allow_html=True)
 
         with col2:
-            notif_html = "".join(f'<li style="margin: 6px 0;"><span style="color: #ffb81c;">📞</span> {n}</li>' for n in sm.unique_notifications)
+            notif_html = "".join(f'<li style="margin: 6px 0; color: #1d1d1f;"><span style="color: #b25000;">→</span> {n}</li>' for n in sm.unique_notifications)
             st.markdown(f"""
             <div class="permit-card">
                 <h4 style="margin-top:0;">All Notifications Required</h4>
@@ -778,7 +800,7 @@ if script_btn and script_text.strip():
 
     # --- Download Document ---
     st.markdown("---")
-    st.markdown("#### 📥 Download Permit Application Package")
+    st.markdown("#### Download Permit Application Package")
 
     doc_buffer = generate_script_doc(script_result)
     st.download_button(
@@ -789,15 +811,15 @@ if script_btn and script_text.strip():
         use_container_width=True,
     )
     st.markdown("""
-    <div class="permit-card" style="border-color: #3f4a6a;">
+    <div class="permit-card">
         <h4 style="margin-top: 0;">What's in the document?</h4>
-        <ul style="color: #e0e0e0;">
+        <ul style="color: #1d1d1f; padding-left: 18px;">
             <li><strong>Executive Summary</strong> — overall feasibility and recommendation</li>
             <li><strong>All Required Permits</strong> — consolidated across all scenes</li>
             <li><strong>Scene-by-Scene Analysis</strong> — exposures, rules, permit descriptions</li>
             <li><strong>Master Submission Checklist</strong> — everything you need to file</li>
         </ul>
-        <p style="color: #9fa4b4; font-size: 0.85em; margin-top: 10px;">
+        <p style="color: rgba(0,0,0,0.48); font-size: 0.85em; margin-top: 10px;">
             Fill in the [TO BE COMPLETED] fields with your production details before submitting to FilmLA.
         </p>
     </div>
@@ -826,7 +848,7 @@ risk_icons = {"low": "🟢", "medium": "🟡", "high": "🟠", "critical": "🔴
 
 # Summary stats bar
 st.markdown("""
-<div style="background: linear-gradient(135deg, #202535, #3f4a6a); border-radius: 12px; padding: 25px; margin-bottom: 20px;">
+<div style="background-color: #ffffff; border-radius: 16px; padding: 28px; margin-bottom: 20px; box-shadow: 0 2px 16px rgba(0,0,0,0.08);">
     <div style="display: flex; justify-content: space-around; text-align: center; flex-wrap: wrap; gap: 15px;">
         <div>
             <div class="stat-number">{exposures}</div>
@@ -856,7 +878,7 @@ st.markdown("""
     permits=len(result.compliance_plan.required_permits),
     lead_time=result.compliance_plan.estimated_lead_time_days,
     feasibility=int(result.simulation.overall_feasibility * 100),
-    feas_color="#97d700" if result.simulation.overall_feasibility >= 0.7 else "#ffb81c" if result.simulation.overall_feasibility >= 0.5 else "#aa1609",
+    feas_color="#1a7f37" if result.simulation.overall_feasibility >= 0.7 else "#b25000" if result.simulation.overall_feasibility >= 0.5 else "#c0392b",
 ), unsafe_allow_html=True)
 
 
@@ -888,18 +910,18 @@ with tab1:
     with col1:
         st.markdown(f"""
         <div class="permit-card">
-            <h4 style="margin-top:0;">Setting</h4>
-            <p>{b.setting_description}</p>
-            <h4>Summary</h4>
-            <p>{b.summary}</p>
+            <h4 style="margin-top:0; margin-bottom:6px;">Setting</h4>
+            <p style="margin-bottom:14px;">{b.setting_description}</p>
+            <h4 style="margin-bottom:6px;">Summary</h4>
+            <p style="margin-bottom:0;">{b.summary}</p>
         </div>
         """, unsafe_allow_html=True)
 
     with col2:
-        chars = "".join(f"<li>{c}</li>" for c in b.characters) if b.characters else "<li style='color:#9fa4b4;'>None detected</li>"
-        props = "".join(f"<li>{p}</li>" for p in b.props) if b.props else "<li style='color:#9fa4b4;'>None detected</li>"
-        vehicles = "".join(f"<li>{v}</li>" for v in b.vehicles) if b.vehicles else "<li style='color:#9fa4b4;'>None detected</li>"
-        sfx = "".join(f"<li>{s}</li>" for s in b.special_effects) if b.special_effects else "<li style='color:#9fa4b4;'>None detected</li>"
+        chars = "".join(f"<li>{c}</li>" for c in b.characters) if b.characters else "<li style='color:rgba(0,0,0,0.4);'>None detected</li>"
+        props = "".join(f"<li>{p}</li>" for p in b.props) if b.props else "<li style='color:rgba(0,0,0,0.4);'>None detected</li>"
+        vehicles = "".join(f"<li>{v}</li>" for v in b.vehicles) if b.vehicles else "<li style='color:rgba(0,0,0,0.4);'>None detected</li>"
+        sfx = "".join(f"<li>{s}</li>" for s in b.special_effects) if b.special_effects else "<li style='color:rgba(0,0,0,0.4);'>None detected</li>"
 
         st.markdown(f"""
         <div class="permit-card">
@@ -928,26 +950,26 @@ with tab2:
     with col1:
         st.markdown(f"""
         <div class="permit-card">
-            <h4 style="margin-top:0;">Jurisdiction</h4>
-            <p style="font-size: 1.1em; color: #009cde; font-weight: 700;">{env.jurisdiction}</p>
-            {"<h4>Sub-Zone</h4><p>" + env.sub_zone + "</p>" if env.sub_zone else ""}
+            <h4 style="margin-top:0; margin-bottom:6px;">Jurisdiction</h4>
+            <p style="font-size: 1.05em; color: #0071e3; font-weight: 500; margin-bottom:12px;">{env.jurisdiction}</p>
+            {"<h4 style='margin-bottom:4px;'>Sub-Zone</h4><p>" + env.sub_zone + "</p>" if env.sub_zone else ""}
         </div>
         """, unsafe_allow_html=True)
 
     with col2:
         if env.nearby_sensitive_sites:
-            sites_html = "".join(f"<li>{s}</li>" for s in env.nearby_sensitive_sites)
+            sites_html = "".join(f"<li style='color:#1d1d1f;'>{s}</li>" for s in env.nearby_sensitive_sites)
             st.markdown(f"""
-            <div class="permit-card" style="border-color: #ffb81c;">
-                <h4 style="margin-top:0; color: #ffb81c !important;">⚠ Nearby Sensitive Sites</h4>
+            <div class="permit-card" style="border-left: 3px solid #ff9500;">
+                <h4 style="margin-top:0; color: #b25000 !important;">Nearby Sensitive Sites</h4>
                 <ul>{sites_html}</ul>
             </div>
             """, unsafe_allow_html=True)
         else:
             st.markdown("""
-            <div class="permit-card">
+            <div class="permit-card" style="border-left: 3px solid #34c759;">
                 <h4 style="margin-top:0;">Nearby Sensitive Sites</h4>
-                <p style="color: #97d700;">✓ No sensitive sites detected within 1000 ft.</p>
+                <p style="color: #1a7f37; margin: 0;">No sensitive sites detected within 1000 ft.</p>
             </div>
             """, unsafe_allow_html=True)
 
@@ -959,15 +981,15 @@ with tab3:
     overall_css = risk_colors_css.get(exp.overall_risk.value, "risk-medium")
     st.markdown(f"""
     <div style="margin-bottom: 15px;">
-        <span style="color: #9fa4b4; font-weight: 700; text-transform: uppercase; font-size: 0.8em;">Overall Risk: </span>
+        <span style="color: rgba(0,0,0,0.48); font-weight: 500; font-size: 0.82em;">Overall Risk: </span>
         <span class="risk-badge {overall_css}">{exp.overall_risk.value}</span>
     </div>
     """, unsafe_allow_html=True)
 
     if not exp.exposures:
         st.markdown("""
-        <div class="permit-card" style="border-color: #008009;">
-            <p style="color: #97d700; font-weight: 700;">✓ No reportable exposures detected. Standard FilmLA permit should suffice.</p>
+        <div class="permit-card" style="border-left: 3px solid #34c759;">
+            <p style="color: #1a7f37; font-weight: 500; margin: 0;">No reportable exposures detected. Standard FilmLA permit should suffice.</p>
         </div>
         """, unsafe_allow_html=True)
     else:
@@ -978,14 +1000,14 @@ with tab3:
             <div class="permit-card">
                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
                     <div>
-                        <span style="font-size: 1.1em; font-weight: 700; color: #ffffff;">{e.element}</span>
-                        <span style="color: #9fa4b4; font-size: 0.85em; margin-left: 8px;">({e.category})</span>
+                        <span style="font-size: 1em; font-weight: 600; color: #1d1d1f;">{e.element}</span>
+                        <span style="color: rgba(0,0,0,0.48); font-size: 0.82em; margin-left: 8px;">({e.category})</span>
                     </div>
                     <span class="risk-badge {badge_css}">{e.risk_level.value}</span>
                 </div>
-                <p style="margin-top: 10px; font-size: 0.95em;">{e.description}</p>
-                <p style="margin-top: 5px; font-size: 0.85em; color: #009cde;">
-                    <strong style="color: #9fa4b4;">Notify:</strong> {notif}
+                <p style="margin-top: 10px; font-size: 0.92em; color: #1d1d1f;">{e.description}</p>
+                <p style="margin-top: 5px; font-size: 0.82em; color: rgba(0,0,0,0.48);">
+                    <strong style="color: rgba(0,0,0,0.56);">Notify:</strong> {notif}
                 </p>
             </div>
             """, unsafe_allow_html=True)
@@ -996,35 +1018,35 @@ with tab4:
     rules = result.rules
 
     st.markdown(f"""
-    <p style="color: #9fa4b4; margin-bottom: 15px;">
-        <strong style="color: #009cde;">{len(rules.matched_rules)}</strong> regulations matched for this scene.
+    <p style="color: rgba(0,0,0,0.48); margin-bottom: 15px; font-size: 0.9em;">
+        <strong style="color: #1d1d1f;">{len(rules.matched_rules)}</strong> regulations matched for this scene.
     </p>
     """, unsafe_allow_html=True)
 
     for r in rules.matched_rules:
         applies = ", ".join(r.applies_to) if r.applies_to else "General"
-        mandatory_badge = '<span style="color: #aa1609; font-weight: 700;">MANDATORY</span>' if r.mandatory else '<span style="color: #ffb81c; font-weight: 700;">ADVISORY</span>'
+        mandatory_badge = '<span style="color: #c0392b; font-weight: 500; font-size: 0.8em; background: rgba(255,59,48,0.1); padding: 2px 8px; border-radius: 980px;">Mandatory</span>' if r.mandatory else '<span style="color: #b25000; font-weight: 500; font-size: 0.8em; background: rgba(255,149,0,0.1); padding: 2px 8px; border-radius: 980px;">Advisory</span>'
         st.markdown(f"""
         <div class="permit-card">
             <div style="display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap;">
                 <div>
-                    <span style="color: #009cde; font-weight: 900; font-size: 0.85em;">{r.rule_id}</span>
-                    <span style="color: #9fa4b4; margin-left: 8px; font-size: 0.85em;">{r.source}</span>
+                    <span style="color: #0071e3; font-weight: 500; font-size: 0.82em;">{r.rule_id}</span>
+                    <span style="color: rgba(0,0,0,0.4); margin-left: 8px; font-size: 0.82em;">{r.source}</span>
                 </div>
                 {mandatory_badge}
             </div>
-            <p style="margin-top: 10px;">{r.summary}</p>
-            <p style="color: #9fa4b4; font-size: 0.8em; margin-top: 5px;">Applies to: <span style="color: #97d700;">{applies}</span></p>
+            <p style="margin-top: 10px; color: #1d1d1f;">{r.summary}</p>
+            <p style="color: rgba(0,0,0,0.4); font-size: 0.8em; margin-top: 5px;">Applies to: <span style="color: #1d1d1f;">{applies}</span></p>
         </div>
         """, unsafe_allow_html=True)
 
     if rules.unmatched_exposures:
         unmatched_str = ", ".join(rules.unmatched_exposures)
         st.markdown(f"""
-        <div class="permit-card" style="border-color: #ffb81c;">
-            <h4 style="margin-top: 0; color: #ffb81c !important;">⚠ Unmatched Exposures</h4>
+        <div class="permit-card" style="border-left: 3px solid #ff9500;">
+            <h4 style="margin-top: 0; color: #b25000 !important;">Unmatched Exposures</h4>
             <p>No specific rules found for: <strong>{unmatched_str}</strong></p>
-            <p style="color: #9fa4b4; font-size: 0.85em;">These may require further manual research or consultation with FilmLA.</p>
+            <p style="color: rgba(0,0,0,0.48); font-size: 0.85em;">These may require further manual research or consultation with FilmLA.</p>
         </div>
         """, unsafe_allow_html=True)
 
@@ -1034,15 +1056,15 @@ with tab5:
     plan = result.compliance_plan
 
     st.markdown(f"""
-    <div class="permit-card" style="border-color: #009cde; border-width: 2px;">
-        <h4 style="margin-top: 0;">Permit Application Description</h4>
-        <p style="font-style: italic; font-size: 1.05em; line-height: 1.8; color: #ffffff;">"{plan.permit_description}"</p>
+    <div class="permit-card" style="border-left: 3px solid #0071e3;">
+        <h4 style="margin-top: 0; margin-bottom: 8px;">Permit Application Description</h4>
+        <p style="font-style: italic; font-size: 1em; line-height: 1.6; color: #1d1d1f;">"{plan.permit_description}"</p>
     </div>
     """, unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
     with col1:
-        permits_html = "".join(f'<li style="margin: 6px 0;"><span style="color: #97d700;">✓</span> {p}</li>' for p in plan.required_permits)
+        permits_html = "".join(f'<li style="margin: 6px 0; color: #1d1d1f;"><span style="color: #1a7f37;">✓</span> {p}</li>' for p in plan.required_permits)
         st.markdown(f"""
         <div class="permit-card">
             <h4 style="margin-top:0;">Required Permits ({len(plan.required_permits)})</h4>
@@ -1050,7 +1072,7 @@ with tab5:
         </div>
         """, unsafe_allow_html=True)
 
-        ins_html = "".join(f'<li style="margin: 6px 0;"><span style="color: #009cde;">🛡</span> {i}</li>' for i in plan.insurance_requirements)
+        ins_html = "".join(f'<li style="margin: 6px 0; color: #1d1d1f;"><span style="color: #0071e3;">✦</span> {i}</li>' for i in plan.insurance_requirements)
         st.markdown(f"""
         <div class="permit-card">
             <h4 style="margin-top:0;">Insurance Requirements</h4>
@@ -1059,7 +1081,7 @@ with tab5:
         """, unsafe_allow_html=True)
 
     with col2:
-        notif_html = "".join(f'<li style="margin: 6px 0;"><span style="color: #ffb81c;">📞</span> {n}</li>' for n in plan.required_notifications)
+        notif_html = "".join(f'<li style="margin: 6px 0; color: #1d1d1f;"><span style="color: #b25000;">→</span> {n}</li>' for n in plan.required_notifications)
         st.markdown(f"""
         <div class="permit-card">
             <h4 style="margin-top:0;">Required Notifications</h4>
@@ -1068,9 +1090,9 @@ with tab5:
         """, unsafe_allow_html=True)
 
         if plan.conditions:
-            cond_html = "".join(f'<li style="margin: 6px 0;"><span style="color: #aa1609;">⚡</span> {c}</li>' for c in plan.conditions)
+            cond_html = "".join(f'<li style="margin: 6px 0; color: #1d1d1f;"><span style="color: #c0392b;">·</span> {c}</li>' for c in plan.conditions)
         else:
-            cond_html = '<li style="color: #9fa4b4;">No special conditions.</li>'
+            cond_html = '<li style="color: rgba(0,0,0,0.4);">No special conditions.</li>'
         st.markdown(f"""
         <div class="permit-card">
             <h4 style="margin-top:0;">Special Conditions</h4>
@@ -1088,25 +1110,25 @@ with tab6:
     feas = sim.overall_feasibility
 
     if feas >= 0.8:
-        feas_label, feas_color_hex = "HIGH", "#97d700"
+        feas_label, feas_color_hex = "High", "#1a7f37"
     elif feas >= 0.5:
-        feas_label, feas_color_hex = "MODERATE", "#ffb81c"
+        feas_label, feas_color_hex = "Moderate", "#b25000"
     else:
-        feas_label, feas_color_hex = "LOW", "#aa1609"
+        feas_label, feas_color_hex = "Low", "#c0392b"
 
     st.markdown(f"""
-    <div style="text-align: center; padding: 20px 0;">
+    <div style="text-align: center; padding: 24px 0 8px 0;">
         <div class="stat-number" style="font-size: 4em; color: {feas_color_hex};">{feas:.0%}</div>
-        <div class="stat-label" style="font-size: 1em; margin-top: 5px;">Overall Feasibility — {feas_label}</div>
+        <div class="stat-label" style="font-size: 0.9em; margin-top: 6px;">Overall Feasibility — {feas_label}</div>
     </div>
     """, unsafe_allow_html=True)
 
     st.progress(feas)
 
     st.markdown(f"""
-    <div class="permit-card" style="border-color: {feas_color_hex}; margin-top: 15px;">
+    <div class="permit-card" style="border-left: 3px solid {feas_color_hex}; margin-top: 16px;">
         <h4 style="margin-top: 0;">Recommendation</h4>
-        <p style="font-size: 1.05em;">{sim.recommendation}</p>
+        <p style="font-size: 0.97em;">{sim.recommendation}</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -1119,16 +1141,16 @@ with tab6:
         st.markdown(f"""
         <div class="permit-card">
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 8px;">
-                <span style="font-weight: 700; color: #ffffff;">{s.scenario_name}</span>
+                <span style="font-weight: 500; color: #1d1d1f;">{s.scenario_name}</span>
                 <span class="risk-badge {badge_css}">{s.impact.value}</span>
             </div>
             <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                <span style="color: #9fa4b4; font-size: 0.8em; min-width: 80px;">P = {s.probability:.0%}</span>
-                <div style="flex: 1; background: #3f4a6a; border-radius: 4px; height: 6px;">
-                    <div style="width: {prob_bar_width}%; background: linear-gradient(90deg, #009cde, #97d700); height: 100%; border-radius: 4px;"></div>
+                <span style="color: rgba(0,0,0,0.4); font-size: 0.8em; min-width: 80px;">P = {s.probability:.0%}</span>
+                <div style="flex: 1; background: rgba(0,0,0,0.1); border-radius: 4px; height: 5px;">
+                    <div style="width: {prob_bar_width}%; background-color: #0071e3; height: 100%; border-radius: 4px;"></div>
                 </div>
             </div>
-            <p style="font-size: 0.9em;"><strong style="color: #97d700;">Mitigation:</strong> {s.mitigation}</p>
+            <p style="font-size: 0.9em; color: #1d1d1f;"><strong style="color: rgba(0,0,0,0.56);">Mitigation:</strong> {s.mitigation}</p>
         </div>
         """, unsafe_allow_html=True)
 
@@ -1136,7 +1158,7 @@ with tab6:
 # --- Tab 7: Full JSON ---
 with tab7:
     st.markdown("""
-    <p style="color: #9fa4b4; margin-bottom: 10px;">Complete pipeline output in JSON format.</p>
+    <p style="color: rgba(0,0,0,0.48); margin-bottom: 10px; font-size: 0.9em;">Complete pipeline output in JSON format.</p>
     """, unsafe_allow_html=True)
     st.json(json.loads(result.model_dump_json()))
 
@@ -1153,9 +1175,9 @@ st.download_button(
     use_container_width=True,
 )
 st.markdown("""
-<div class="permit-card" style="border-color: #3f4a6a;">
+<div class="permit-card">
     <h4 style="margin-top: 0;">What's in the document?</h4>
-    <ul style="color: #e0e0e0;">
+    <ul style="color: #1d1d1f; padding-left: 18px;">
         <li><strong>Production Information</strong> — fill in your company details</li>
         <li><strong>Location Details</strong> — environment, jurisdiction, sensitive sites</li>
         <li><strong>Activity Description</strong> — permit-ready narrative</li>
@@ -1165,7 +1187,7 @@ st.markdown("""
         <li><strong>Risk Assessment</strong> — scenarios and mitigations</li>
         <li><strong>Submission Checklist</strong> — everything you need to file</li>
     </ul>
-    <p style="color: #9fa4b4; font-size: 0.85em; margin-top: 10px;">
+    <p style="color: rgba(0,0,0,0.48); font-size: 0.85em; margin-top: 10px;">
         Fill in the [TO BE COMPLETED] fields with your production details before submitting to FilmLA.
     </p>
 </div>
