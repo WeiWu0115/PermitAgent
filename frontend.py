@@ -386,18 +386,14 @@ st.markdown("""
         border-top-color: #0071e3 !important;
     }
 
-    /* Hide Streamlit branding but keep sidebar toggle */
+    /* Hide Streamlit branding */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
-    header {visibility: hidden;}
-    [data-testid="collapsedControl"] {
-        visibility: visible !important;
-        color: #1d1d1f !important;
-    }
-    [data-testid="stSidebarCollapsedControl"] {
-        visibility: visible !important;
-        color: #1d1d1f !important;
-    }
+    [data-testid="stHeader"] {display: none;}
+    [data-testid="stToolbar"] {display: none;}
+    /* Keep sidebar toggle visible */
+    [data-testid="collapsedControl"] {display: flex !important;}
+    [data-testid="stSidebarCollapsedControl"] {display: flex !important;}
 </style>
 """, unsafe_allow_html=True)
 
