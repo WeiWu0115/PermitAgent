@@ -96,172 +96,242 @@ st.markdown("""
     html, body, [class*="css"] {
         font-family: -apple-system, "SF Pro Text", "SF Pro Display", BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 
     /* === Main background === */
     .stApp {
-        background-color: #f5f5f7;
+        background-color: #f2f2f7;
         color: #1d1d1f;
+    }
+
+    /* === Main content padding === */
+    .main .block-container {
+        padding-top: 2rem;
+        padding-bottom: 3rem;
+        max-width: 960px;
     }
 
     /* === Sidebar === */
     section[data-testid="stSidebar"] {
         background-color: #ffffff;
-        border-right: 1px solid rgba(0,0,0,0.1);
+        border-right: 1px solid rgba(0,0,0,0.08);
+    }
+    section[data-testid="stSidebar"] > div {
+        padding-top: 1.5rem;
+        padding-bottom: 2rem;
     }
     section[data-testid="stSidebar"] .stMarkdown p,
     section[data-testid="stSidebar"] .stMarkdown li,
     section[data-testid="stSidebar"] label {
         color: #1d1d1f !important;
+        font-size: 0.9em;
     }
     section[data-testid="stSidebar"] .stSelectbox label,
     section[data-testid="stSidebar"] .stTextArea label,
-    section[data-testid="stSidebar"] .stTextInput label {
-        color: rgba(0,0,0,0.56) !important;
-        font-weight: 600;
-        font-size: 0.8em;
-        letter-spacing: -0.1px;
+    section[data-testid="stSidebar"] .stTextInput label,
+    section[data-testid="stSidebar"] .stRadio label {
+        color: rgba(0,0,0,0.5) !important;
+        font-weight: 500;
+        font-size: 0.78em !important;
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
+    }
+    section[data-testid="stSidebar"] hr {
+        border-color: rgba(0,0,0,0.07) !important;
+        margin: 1rem 0;
     }
 
     /* === Headings === */
     h1 {
         color: #1d1d1f !important;
-        font-weight: 600 !important;
-        letter-spacing: -0.28px;
+        font-weight: 700 !important;
+        letter-spacing: -0.5px;
         line-height: 1.07;
     }
-    h2, h3 {
+    h2 {
+        color: #1d1d1f !important;
+        font-weight: 600 !important;
+        letter-spacing: -0.3px;
+        font-size: 1.4em !important;
+    }
+    h3 {
         color: #1d1d1f !important;
         font-weight: 600 !important;
         letter-spacing: -0.2px;
+        font-size: 1.15em !important;
     }
     h4, h5 {
         color: #1d1d1f !important;
         font-weight: 600 !important;
+        font-size: 0.95em !important;
+        letter-spacing: -0.1px;
     }
 
-    /* === Tabs === */
+    /* === Tabs — iOS segmented control style === */
     .stTabs [data-baseweb="tab-list"] {
-        background-color: rgba(0,0,0,0.06);
-        border-radius: 8px;
-        padding: 4px;
+        background-color: rgba(0,0,0,0.07);
+        border-radius: 10px;
+        padding: 3px;
         gap: 2px;
     }
     .stTabs [data-baseweb="tab"] {
-        color: rgba(0,0,0,0.56);
+        color: rgba(0,0,0,0.5);
         font-weight: 500;
-        font-size: 0.85em;
-        border-radius: 6px;
-        padding: 7px 14px;
+        font-size: 0.82em;
+        border-radius: 8px;
+        padding: 7px 13px;
         background-color: transparent;
         letter-spacing: -0.1px;
+        transition: all 0.15s ease;
     }
     .stTabs [aria-selected="true"] {
         color: #1d1d1f !important;
         background-color: #ffffff !important;
         border-bottom: none !important;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.12) !important;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.14), 0 0 0 0.5px rgba(0,0,0,0.06) !important;
+        font-weight: 600 !important;
     }
     .stTabs [data-baseweb="tab"]:hover {
         color: #1d1d1f;
+        background-color: rgba(255,255,255,0.5);
     }
     .stTabs [data-baseweb="tab-panel"] {
-        background-color: #f5f5f7;
-        border-radius: 0 0 8px 8px;
-        padding: 20px 4px;
+        background-color: transparent;
+        padding: 20px 0;
     }
 
     /* === Metrics === */
     [data-testid="stMetric"] {
         background-color: #ffffff;
-        border-radius: 12px;
-        padding: 20px;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        border-radius: 16px;
+        padding: 22px 20px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.06);
+        transition: box-shadow 0.2s ease;
+    }
+    [data-testid="stMetric"]:hover {
+        box-shadow: 0 2px 6px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.08);
     }
     [data-testid="stMetricLabel"] {
-        color: rgba(0,0,0,0.48) !important;
+        color: rgba(0,0,0,0.45) !important;
         font-weight: 500;
-        font-size: 0.75em !important;
-        letter-spacing: -0.1px;
+        font-size: 0.72em !important;
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
     }
     [data-testid="stMetricValue"] {
         color: #1d1d1f !important;
-        font-weight: 600 !important;
-        font-size: 1.6em !important;
-        letter-spacing: -0.2px;
+        font-weight: 700 !important;
+        font-size: 1.8em !important;
+        letter-spacing: -0.5px;
+        line-height: 1.1;
     }
 
     /* === Expanders === */
     .streamlit-expanderHeader {
         background-color: #ffffff !important;
         border: none !important;
-        border-radius: 8px !important;
+        border-radius: 12px !important;
         color: #1d1d1f !important;
-        font-weight: 500 !important;
-        box-shadow: 0 1px 4px rgba(0,0,0,0.08) !important;
+        font-weight: 600 !important;
+        font-size: 0.92em !important;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.05) !important;
+        padding: 14px 18px !important;
+        transition: box-shadow 0.2s ease !important;
     }
     .streamlit-expanderHeader:hover {
-        box-shadow: 0 2px 8px rgba(0,0,0,0.12) !important;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.08), 0 6px 20px rgba(0,0,0,0.07) !important;
     }
     .streamlit-expanderContent {
         background-color: #ffffff !important;
         border: none !important;
-        border-radius: 0 0 8px 8px !important;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.06) !important;
+        border-radius: 0 0 12px 12px !important;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.05) !important;
+        padding: 4px 18px 16px !important;
     }
 
     /* === Buttons === */
     .stButton > button {
         background-color: #0071e3 !important;
         color: #ffffff !important;
-        font-weight: 400 !important;
-        letter-spacing: -0.224px !important;
+        font-weight: 500 !important;
+        letter-spacing: -0.2px !important;
         border: none !important;
         border-radius: 980px !important;
-        padding: 12px 22px !important;
-        font-size: 0.95em !important;
-        transition: background-color 0.2s ease !important;
+        padding: 11px 24px !important;
+        font-size: 0.92em !important;
+        transition: background-color 0.15s ease, transform 0.1s ease !important;
+        box-shadow: 0 1px 3px rgba(0,113,227,0.3) !important;
     }
     .stButton > button:hover {
         background-color: #0077ed !important;
+        box-shadow: 0 2px 8px rgba(0,113,227,0.4) !important;
+        transform: translateY(-1px) !important;
+    }
+    .stButton > button:active {
+        transform: translateY(0) !important;
+        background-color: #006edb !important;
+    }
+
+    /* === Download button === */
+    .stDownloadButton > button {
+        background-color: #f2f2f7 !important;
+        color: #0071e3 !important;
+        font-weight: 500 !important;
+        border: 1.5px solid #0071e3 !important;
+        border-radius: 980px !important;
+        padding: 11px 24px !important;
+        font-size: 0.92em !important;
+        transition: all 0.15s ease !important;
         box-shadow: none !important;
-        transform: none !important;
+    }
+    .stDownloadButton > button:hover {
+        background-color: #0071e3 !important;
+        color: #ffffff !important;
+        transform: translateY(-1px) !important;
     }
 
     /* === Progress bar === */
     .stProgress > div > div {
         background-color: #0071e3 !important;
+        border-radius: 4px !important;
     }
-    .stProgress {
-        background-color: rgba(0,0,0,0.1) !important;
-        border-radius: 4px;
+    .stProgress > div {
+        background-color: rgba(0,0,0,0.08) !important;
+        border-radius: 4px !important;
+        height: 5px !important;
     }
 
     /* === Info/Warning/Success boxes === */
     .stAlert {
         background-color: #ffffff !important;
-        border-radius: 8px !important;
+        border-radius: 12px !important;
         border: none !important;
-        box-shadow: 0 1px 4px rgba(0,0,0,0.08) !important;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.05) !important;
+        font-size: 0.9em;
     }
 
     /* === JSON viewer === */
     [data-testid="stJson"] {
         background-color: #ffffff !important;
-        border-radius: 12px;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        border-radius: 16px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.06);
+        padding: 16px !important;
     }
 
     /* === Dividers === */
     hr {
-        border-color: rgba(0,0,0,0.1) !important;
+        border: none !important;
+        border-top: 1px solid rgba(0,0,0,0.08) !important;
+        margin: 1.5rem 0 !important;
     }
 
     /* === Text styling === */
     .stMarkdown p {
         color: #1d1d1f;
-        line-height: 1.47;
-        letter-spacing: -0.374px;
+        line-height: 1.6;
+        letter-spacing: -0.2px;
+        font-size: 0.95em;
     }
     .stMarkdown strong {
         color: #1d1d1f;
@@ -269,82 +339,148 @@ st.markdown("""
     }
     .stMarkdown li {
         color: #1d1d1f;
+        line-height: 1.7;
+        font-size: 0.93em;
     }
     .stCaption {
-        color: rgba(0,0,0,0.48) !important;
-        font-size: 0.85em !important;
+        color: rgba(0,0,0,0.45) !important;
+        font-size: 0.82em !important;
     }
 
     /* === Custom card class === */
     .permit-card {
         background-color: #ffffff;
-        border-radius: 12px;
-        padding: 20px 22px;
-        margin: 8px 0;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        border-radius: 16px;
+        padding: 22px 24px;
+        margin: 10px 0;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.06);
+        transition: box-shadow 0.2s ease, transform 0.2s ease;
+    }
+    .permit-card:hover {
+        box-shadow: 0 2px 6px rgba(0,0,0,0.08), 0 8px 28px rgba(0,0,0,0.09);
+        transform: translateY(-1px);
     }
     .permit-card h4 {
         color: #1d1d1f !important;
-        font-size: 1em;
+        font-size: 0.9em;
         font-weight: 600;
-        letter-spacing: -0.1px;
+        letter-spacing: 0.2px;
+        text-transform: uppercase;
+        margin-bottom: 8px !important;
+        color: rgba(0,0,0,0.5) !important;
     }
     .permit-card p {
         color: #1d1d1f;
-        font-size: 0.95em;
+        font-size: 0.93em;
+        line-height: 1.6;
+        margin-bottom: 0;
     }
 
     /* === Risk badges === */
     .risk-badge {
         display: inline-block;
-        padding: 3px 10px;
+        padding: 3px 11px;
         border-radius: 980px;
-        font-weight: 500;
-        font-size: 0.8em;
-        letter-spacing: -0.1px;
+        font-weight: 600;
+        font-size: 0.75em;
+        letter-spacing: 0.2px;
+        text-transform: uppercase;
     }
-    .risk-low { background-color: rgba(52,199,89,0.15); color: #1a7f37; }
-    .risk-medium { background-color: rgba(255,149,0,0.15); color: #b25000; }
-    .risk-high { background-color: rgba(255,59,48,0.15); color: #c0392b; }
-    .risk-critical { background-color: rgba(175,82,222,0.15); color: #7b2fa6; }
+    .risk-low    { background-color: rgba(52,199,89,0.12);  color: #1a7f37; }
+    .risk-medium { background-color: rgba(255,149,0,0.12);  color: #9a4500; }
+    .risk-high   { background-color: rgba(255,59,48,0.12);  color: #ae1e13; }
+    .risk-critical { background-color: rgba(175,82,222,0.12); color: #6b2594; }
 
     /* === Stat numbers === */
     .stat-number {
-        font-size: 2.8em;
-        font-weight: 600;
+        font-size: 2.6em;
+        font-weight: 700;
         color: #1d1d1f;
         line-height: 1;
-        letter-spacing: -0.5px;
+        letter-spacing: -1px;
     }
     .stat-label {
-        color: rgba(0,0,0,0.48);
-        font-size: 0.75em;
-        letter-spacing: -0.1px;
-        font-weight: 400;
-        margin-top: 4px;
+        color: rgba(0,0,0,0.45);
+        font-size: 0.72em;
+        letter-spacing: 0.2px;
+        text-transform: uppercase;
+        font-weight: 500;
+        margin-top: 5px;
     }
 
     /* === Hero banner === */
     .hero-banner {
-        background-color: #000000;
-        border-radius: 18px;
-        padding: 56px 40px;
-        margin-bottom: 24px;
+        background: linear-gradient(145deg, #1c1c1e 0%, #000000 60%);
+        border-radius: 20px;
+        padding: 64px 48px;
+        margin-bottom: 28px;
         text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    .hero-banner::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(ellipse at 60% 40%, rgba(0,113,227,0.12) 0%, transparent 60%);
+        pointer-events: none;
     }
     .hero-banner h1 {
-        font-size: 2.8em !important;
-        font-weight: 600 !important;
+        font-size: 3.2em !important;
+        font-weight: 700 !important;
         color: #f5f5f7 !important;
-        letter-spacing: -0.28px;
+        letter-spacing: -1.5px !important;
         margin-bottom: 0 !important;
+        line-height: 1.05 !important;
+        position: relative;
     }
-    .hero-banner p {
-        color: rgba(255,255,255,0.72);
-        font-size: 1em;
-        margin-top: 10px;
+    .hero-banner .hero-sub {
+        color: rgba(255,255,255,0.6);
+        font-size: 1.05em;
+        margin-top: 14px;
         letter-spacing: -0.2px;
-        line-height: 1.47;
+        line-height: 1.5;
+        max-width: 520px;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+    }
+
+    /* === Feature cards === */
+    .feature-card {
+        background-color: #ffffff;
+        border-radius: 16px;
+        padding: 28px 24px;
+        margin: 8px 0;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.06);
+        height: 100%;
+        transition: box-shadow 0.2s ease, transform 0.2s ease;
+    }
+    .feature-card:hover {
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 12px 32px rgba(0,0,0,0.09);
+        transform: translateY(-2px);
+    }
+    .feature-card .icon {
+        font-size: 1.8em;
+        margin-bottom: 14px;
+        display: block;
+    }
+    .feature-card h4 {
+        color: #1d1d1f !important;
+        font-size: 1em !important;
+        font-weight: 600 !important;
+        letter-spacing: -0.2px !important;
+        text-transform: none !important;
+        margin-bottom: 8px !important;
+    }
+    .feature-card p {
+        color: rgba(0,0,0,0.56);
+        font-size: 0.88em;
+        line-height: 1.6;
+        margin: 0;
     }
 
     /* === Pipeline flow === */
@@ -352,33 +488,61 @@ st.markdown("""
         display: inline-block;
         background-color: #1d1d1f;
         color: #f5f5f7;
-        padding: 5px 13px;
+        padding: 6px 14px;
         border-radius: 980px;
-        font-weight: 400;
-        font-size: 0.8em;
+        font-weight: 500;
+        font-size: 0.78em;
         margin: 3px;
         letter-spacing: -0.1px;
     }
     .pipeline-arrow {
         display: inline-block;
-        color: rgba(0,0,0,0.3);
-        font-size: 1em;
-        margin: 0 3px;
+        color: rgba(0,0,0,0.25);
+        font-size: 0.9em;
+        margin: 0 2px;
     }
 
     /* === Selectbox / inputs === */
     .stSelectbox > div > div,
     .stTextArea > div > div > textarea,
     .stTextInput > div > div > input {
-        background-color: #ffffff !important;
+        background-color: #f2f2f7 !important;
         color: #1d1d1f !important;
-        border: 1px solid rgba(0,0,0,0.2) !important;
-        border-radius: 11px !important;
+        border: 1px solid rgba(0,0,0,0.12) !important;
+        border-radius: 10px !important;
+        font-size: 0.9em !important;
     }
     .stTextArea > div > div > textarea:focus,
     .stTextInput > div > div > input:focus {
+        background-color: #ffffff !important;
         border-color: #0071e3 !important;
-        box-shadow: 0 0 0 3px rgba(0,113,227,0.2) !important;
+        box-shadow: 0 0 0 3px rgba(0,113,227,0.15) !important;
+    }
+
+    /* === File uploader === */
+    [data-testid="stFileUploader"] {
+        background-color: #ffffff;
+        border-radius: 12px;
+        padding: 4px;
+    }
+    [data-testid="stFileUploadDropzone"] {
+        background-color: #f2f2f7 !important;
+        border: 1.5px dashed rgba(0,0,0,0.2) !important;
+        border-radius: 10px !important;
+    }
+
+    /* === Radio buttons === */
+    .stRadio > div {
+        background-color: rgba(0,0,0,0.05);
+        border-radius: 10px;
+        padding: 4px;
+        display: flex;
+        gap: 2px;
+    }
+    .stRadio > div label {
+        border-radius: 8px !important;
+        padding: 6px 12px !important;
+        transition: all 0.15s ease !important;
     }
 
     /* === Spinner === */
@@ -563,20 +727,20 @@ if not analyze_btn and not script_btn:
     st.markdown("""
     <div class="hero-banner">
         <h1>PermitAgent</h1>
-        <p>Multi-Agent System for Narrative-to-Bureaucratic Alignment in Film Production</p>
+        <p class="hero-sub">A multi-agent AI system that transforms film scene descriptions into structured LA permit compliance documentation.</p>
     </div>
     """, unsafe_allow_html=True)
 
     # Pipeline visualization
-    st.markdown("#### Pipeline Architecture")
     st.markdown("""
-    <div style="text-align: center; padding: 20px 0;">
+    <div style="text-align: center; padding: 8px 0 24px 0;">
+        <p style="color: rgba(0,0,0,0.4); font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500; margin-bottom: 12px;">Pipeline Architecture</p>
         <span class="pipeline-step">Scene Breakdown</span>
         <span class="pipeline-arrow">→</span>
         <span class="pipeline-step">Environment</span>
-        <span style="color: rgba(0,0,0,0.3); font-size: 0.9em;"> + </span>
+        <span style="color: rgba(0,0,0,0.25); font-size: 0.85em;"> + </span>
         <span class="pipeline-step">Exposures</span>
-        <span style="color: rgba(0,0,0,0.3); font-size: 0.75em; margin: 0 4px;">(parallel)</span>
+        <span style="color: rgba(0,0,0,0.25); font-size: 0.72em; margin: 0 4px;">(parallel)</span>
         <span class="pipeline-arrow">→</span>
         <span class="pipeline-step">Rules</span>
         <span class="pipeline-arrow">→</span>
@@ -586,36 +750,37 @@ if not analyze_btn and not script_btn:
     </div>
     """, unsafe_allow_html=True)
 
-    st.markdown("---")
-
     # Feature cards
     col1, col2, col3 = st.columns(3)
     with col1:
         st.markdown("""
-        <div class="permit-card">
-            <h4 style="margin-top: 0;">Real Regulations</h4>
+        <div class="feature-card">
+            <span class="icon">📋</span>
+            <h4>Real Regulations</h4>
             <p>40+ rules from LAMC, FilmLA, FAA, LAFD, LADOT, and more. Cited with specific code sections.</p>
         </div>
         """, unsafe_allow_html=True)
     with col2:
         st.markdown("""
-        <div class="permit-card">
-            <h4 style="margin-top: 0;">Smart Detection</h4>
+        <div class="feature-card">
+            <span class="icon">🤖</span>
+            <h4>Smart Detection</h4>
             <p>AI-powered scene analysis identifies drones, weapons, crowds, pyrotechnics, and other reportable elements.</p>
         </div>
         """, unsafe_allow_html=True)
     with col3:
         st.markdown("""
-        <div class="permit-card">
-            <h4 style="margin-top: 0;">Location Intelligence</h4>
+        <div class="feature-card">
+            <span class="icon">📍</span>
+            <h4>Location Intelligence</h4>
             <p>Google Maps integration detects nearby schools, hospitals, and government buildings within 1000 ft.</p>
         </div>
         """, unsafe_allow_html=True)
 
     st.markdown("")
     st.markdown("""
-    <div style="text-align: center; padding: 20px 0;">
-        <p style="color: rgba(0,0,0,0.48);">Select a sample scene or paste a full screenplay in the sidebar, then click <strong style="color: #0071e3;">Analyze</strong>.</p>
+    <div style="text-align: center; padding: 24px 0 8px 0;">
+        <p style="color: rgba(0,0,0,0.4); font-size: 0.9em;">Select a sample scene or paste a screenplay in the sidebar, then click <strong style="color: #0071e3; font-weight: 600;">Analyze</strong>.</p>
     </div>
     """, unsafe_allow_html=True)
     st.stop()
