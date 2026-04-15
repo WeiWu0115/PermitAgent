@@ -123,7 +123,11 @@ def _heuristic_alignment(
     if environment.environment_type == EnvironmentType.PARK:
         required_permits.append("Dept. of Recreation and Parks Permit")
     if environment.environment_type == EnvironmentType.BEACH:
-        required_permits.append("Dept. of Beaches and Harbors Permit")
+        jurisdiction_text = environment.jurisdiction.lower()
+        if "city of los angeles" in jurisdiction_text or "filmla" in jurisdiction_text:
+            required_permits.append("Dept. of Recreation and Parks Permit")
+        else:
+            required_permits.append("Dept. of Beaches and Harbors Permit")
     for rule in rules.matched_rules:
         if "drone" in rule.summary.lower():
             required_permits.extend(["FAA Part 107 Waiver", "FilmLA Drone Supplemental"])

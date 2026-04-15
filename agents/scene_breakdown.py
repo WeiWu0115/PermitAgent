@@ -77,7 +77,8 @@ def run_scene_breakdown(scene_input: SceneInput) -> SceneBreakdown:
 
 def _heuristic_breakdown(scene_input: SceneInput, scene_id: str) -> SceneBreakdown:
     """Fallback heuristic extraction when LLM is unavailable."""
-    text = scene_input.scene_text.upper()
+    raw_text = scene_input.scene_text.strip()
+    text = raw_text.upper()
 
     # Time of day
     time_of_day = "DAY"
@@ -95,8 +96,19 @@ def _heuristic_breakdown(scene_input: SceneInput, scene_id: str) -> SceneBreakdo
         interior_exterior = "EXT"
 
     # Setting description
-    sentences = scene_input.scene_text.split(".")
-    setting_description = sentences[0].strip() if sentences else scene_input.scene_text[:80]
+    lines = [line.strip() for line in raw_text.splitlines() if line.strip()]
+    first_line = lines[0] if lines else raw_text
+    slug_match = re.match(
+        r"^(?P<ie>INT\.?/EXT\.?|INT\.?|EXT\.?)\s+(?P<location>.+?)\s*[-–—]\s*(?P<time>DAY|NIGHT|DAWN|DUSK|SUNSET|SUNRISE|MORNING|EVENING|CONTINUOUS|LATER|SAME)\b",
+        first_line,
+        flags=re.IGNORECASE,
+    )
+    if slug_match:
+        setting_description = slug_match.group("location").strip(" .-")
+    else:
+        sentence_match = re.search(r"(.+?[.!?])(?:\s|$)", raw_text)
+        first_sentence = sentence_match.group(1).strip() if sentence_match else raw_text[:120].strip()
+        setting_description = first_sentence
 
     # Props
     prop_keywords = [

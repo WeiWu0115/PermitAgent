@@ -10,6 +10,7 @@ Visual style inspired by Apple Human Interface Guidelines:
 
 import sys
 import json
+import html
 from datetime import datetime
 
 import streamlit as st
@@ -19,6 +20,11 @@ sys.path.insert(0, ".")
 from app.schemas import SceneInput, ScriptInput
 from workflows.pipeline import run_pipeline, run_script_pipeline
 from app.doc_generator import generate_single_scene_doc, generate_script_doc
+
+
+def _esc(value) -> str:
+    """Escape dynamic text before injecting it into HTML."""
+    return html.escape(str(value), quote=True)
 
 
 def _parse_uploaded_file(uploaded_file) -> str:
@@ -677,7 +683,7 @@ with st.sidebar:
                 <div style="background: rgba(52,199,89,0.1); border-radius: 8px; padding: 8px 12px; margin: 5px 0;">
                     <span style="color: #1a7f37; font-weight: 600;">✓</span>
                     <span style="color: #1d1d1f; font-size: 0.85em;">
-                        Loaded <strong>{uploaded_file.name}</strong> — {len(uploaded_text)} characters
+                        Loaded <strong>{_esc(uploaded_file.name)}</strong> — {len(uploaded_text)} characters
                     </span>
                 </div>
                 """, unsafe_allow_html=True)
@@ -869,7 +875,7 @@ if script_btn and script_text.strip():
             for hrs in sm.high_risk_scenes:
                 st.markdown(f"""
                 <div class="permit-card" style="border-left: 3px solid #ff3b30;">
-                    <span style="color: #c0392b; font-weight: 600;">High Risk</span>&ensp;{hrs}
+                    <span style="color: #c0392b; font-weight: 600;">High Risk</span>&ensp;{_esc(hrs)}
                 </div>
                 """, unsafe_allow_html=True)
         else:
@@ -892,7 +898,7 @@ if script_btn and script_text.strip():
                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
                     <div>
                         <span style="color: rgba(0,0,0,0.4); font-size: 0.82em; font-weight: 500;">#{ps.scene_number}</span>
-                        <span style="font-weight: 500; margin-left: 8px; color: #1d1d1f;">{ps.slug_line}</span>
+                        <span style="font-weight: 500; margin-left: 8px; color: #1d1d1f;">{_esc(ps.slug_line)}</span>
                     </div>
                     <div style="display: flex; gap: 10px; align-items: center;">
                         <span style="color: rgba(0,0,0,0.48); font-size: 0.82em;">{exp_count} exposures</span>
@@ -991,6 +997,10 @@ if script_btn and script_text.strip():
 
     st.stop()
 
+if script_btn and not script_text.strip():
+    st.warning("Please paste a screenplay or upload a file before running full-script analysis.")
+    st.stop()
+
 
 # ===========================================================================
 # SINGLE SCENE MODE
@@ -1075,9 +1085,9 @@ with tab1:
         st.markdown(f"""
         <div class="permit-card">
             <h4 style="margin-top:0; margin-bottom:6px;">Setting</h4>
-            <p style="margin-bottom:14px;">{b.setting_description}</p>
+            <p style="margin-bottom:14px;">{_esc(b.setting_description)}</p>
             <h4 style="margin-bottom:6px;">Summary</h4>
-            <p style="margin-bottom:0;">{b.summary}</p>
+            <p style="margin-bottom:0;">{_esc(b.summary)}</p>
         </div>
         """, unsafe_allow_html=True)
 
@@ -1115,8 +1125,8 @@ with tab2:
         st.markdown(f"""
         <div class="permit-card">
             <h4 style="margin-top:0; margin-bottom:6px;">Jurisdiction</h4>
-            <p style="font-size: 1.05em; color: #0071e3; font-weight: 500; margin-bottom:12px;">{env.jurisdiction}</p>
-            {"<h4 style='margin-bottom:4px;'>Sub-Zone</h4><p>" + env.sub_zone + "</p>" if env.sub_zone else ""}
+            <p style="font-size: 1.05em; color: #0071e3; font-weight: 500; margin-bottom:12px;">{_esc(env.jurisdiction)}</p>
+            {"<h4 style='margin-bottom:4px;'>Sub-Zone</h4><p>" + _esc(env.sub_zone) + "</p>" if env.sub_zone else ""}
         </div>
         """, unsafe_allow_html=True)
 
@@ -1169,7 +1179,7 @@ with tab3:
                     </div>
                     <span class="risk-badge {badge_css}">{e.risk_level.value}</span>
                 </div>
-                <p style="margin-top: 10px; font-size: 0.92em; color: #1d1d1f;">{e.description}</p>
+                <p style="margin-top: 10px; font-size: 0.92em; color: #1d1d1f;">{_esc(e.description)}</p>
                 <p style="margin-top: 5px; font-size: 0.82em; color: rgba(0,0,0,0.48);">
                     <strong style="color: rgba(0,0,0,0.56);">Notify:</strong> {notif}
                 </p>
@@ -1199,8 +1209,8 @@ with tab4:
                 </div>
                 {mandatory_badge}
             </div>
-            <p style="margin-top: 10px; color: #1d1d1f;">{r.summary}</p>
-            <p style="color: rgba(0,0,0,0.4); font-size: 0.8em; margin-top: 5px;">Applies to: <span style="color: #1d1d1f;">{applies}</span></p>
+            <p style="margin-top: 10px; color: #1d1d1f;">{_esc(r.summary)}</p>
+            <p style="color: rgba(0,0,0,0.4); font-size: 0.8em; margin-top: 5px;">Applies to: <span style="color: #1d1d1f;">{_esc(applies)}</span></p>
         </div>
         """, unsafe_allow_html=True)
 
@@ -1209,7 +1219,7 @@ with tab4:
         st.markdown(f"""
         <div class="permit-card" style="border-left: 3px solid #ff9500;">
             <h4 style="margin-top: 0; color: #b25000 !important;">Unmatched Exposures</h4>
-            <p>No specific rules found for: <strong>{unmatched_str}</strong></p>
+            <p>No specific rules found for: <strong>{_esc(unmatched_str)}</strong></p>
             <p style="color: rgba(0,0,0,0.48); font-size: 0.85em;">These may require further manual research or consultation with FilmLA.</p>
         </div>
         """, unsafe_allow_html=True)
@@ -1222,7 +1232,7 @@ with tab5:
     st.markdown(f"""
     <div class="permit-card" style="border-left: 3px solid #0071e3;">
         <h4 style="margin-top: 0; margin-bottom: 8px;">Permit Application Description</h4>
-        <p style="font-style: italic; font-size: 1em; line-height: 1.6; color: #1d1d1f;">"{plan.permit_description}"</p>
+        <p style="font-style: italic; font-size: 1em; line-height: 1.6; color: #1d1d1f;">"{_esc(plan.permit_description)}"</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -1292,7 +1302,7 @@ with tab6:
     st.markdown(f"""
     <div class="permit-card" style="border-left: 3px solid {feas_color_hex}; margin-top: 16px;">
         <h4 style="margin-top: 0;">Recommendation</h4>
-        <p style="font-size: 0.97em;">{sim.recommendation}</p>
+            <p style="font-size: 0.97em;">{_esc(sim.recommendation)}</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -1305,7 +1315,7 @@ with tab6:
         st.markdown(f"""
         <div class="permit-card">
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 8px;">
-                <span style="font-weight: 500; color: #1d1d1f;">{s.scenario_name}</span>
+                <span style="font-weight: 500; color: #1d1d1f;">{_esc(s.scenario_name)}</span>
                 <span class="risk-badge {badge_css}">{s.impact.value}</span>
             </div>
             <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
@@ -1314,7 +1324,7 @@ with tab6:
                     <div style="width: {prob_bar_width}%; background-color: #0071e3; height: 100%; border-radius: 4px;"></div>
                 </div>
             </div>
-            <p style="font-size: 0.9em; color: #1d1d1f;"><strong style="color: rgba(0,0,0,0.56);">Mitigation:</strong> {s.mitigation}</p>
+            <p style="font-size: 0.9em; color: #1d1d1f;"><strong style="color: rgba(0,0,0,0.56);">Mitigation:</strong> {_esc(s.mitigation)}</p>
         </div>
         """, unsafe_allow_html=True)
 
