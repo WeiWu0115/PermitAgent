@@ -10,16 +10,18 @@ Provides location intelligence for the Environment Classification Agent:
 from __future__ import annotations
 
 import logging
+import socket
 from dataclasses import dataclass, field
 from typing import Optional
 
 import googlemaps
 
-from app.config import GOOGLE_MAPS_API_KEY
+from app.config import GOOGLE_MAPS_API_KEY, GOOGLE_MAPS_TIMEOUT_SECONDS
 
 logger = logging.getLogger(__name__)
 
 _client: Optional[googlemaps.Client] = None
+_geocoder_unavailable = False
 
 # Sensitive site types to search for (Google Places API types)
 _SENSITIVE_PLACE_TYPES = [
@@ -56,12 +58,19 @@ class GeoResult:
 def _get_client() -> Optional[googlemaps.Client]:
     """Get or create the Google Maps client."""
     global _client
+    if _geocoder_unavailable:
+        return None
     if _client is not None:
         return _client
     if not GOOGLE_MAPS_API_KEY or GOOGLE_MAPS_API_KEY == "your-key-here":
         return None
     try:
-        _client = googlemaps.Client(key=GOOGLE_MAPS_API_KEY)
+        _client = googlemaps.Client(
+            key=GOOGLE_MAPS_API_KEY,
+            timeout=GOOGLE_MAPS_TIMEOUT_SECONDS,
+            retry_timeout=0,
+            queries_per_second=50,
+        )
         return _client
     except Exception as e:
         logger.error("Failed to create Google Maps client: %s", e)
@@ -75,9 +84,11 @@ def geocode_location(address: str) -> Optional[GeoResult]:
     Returns a GeoResult with coordinates, jurisdiction info, and
     nearby sensitive sites. Returns None if geocoding is unavailable.
     """
+    global _geocoder_unavailable
     client = _get_client()
     if client is None:
-        logger.warning("No Google Maps API key — skipping geocoding.")
+        if not _geocoder_unavailable:
+            logger.warning("No Google Maps API key or geocoder unavailable — skipping geocoding.")
         return None
 
     try:
@@ -125,9 +136,15 @@ def geocode_location(address: str) -> Optional[GeoResult]:
 
     except googlemaps.exceptions.ApiError as e:
         logger.error("Google Maps API error: %s", e)
+        _geocoder_unavailable = True
+        return None
+    except socket.gaierror as e:
+        logger.error("Geocoding DNS error: %s", e)
+        _geocoder_unavailable = True
         return None
     except Exception as e:
         logger.error("Geocoding error: %s", e)
+        _geocoder_unavailable = True
         return None
 
 

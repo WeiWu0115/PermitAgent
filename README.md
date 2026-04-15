@@ -14,12 +14,27 @@ source venv/bin/activate
 # 2. Install dependencies
 pip install -r requirements.txt
 
-# 3. Run the server
+# 3. Run the API server
 cd PermitAgent
 python -m app.main
 ```
 
 The API will be available at `http://localhost:8000`.
+
+## Streamlit Frontend
+
+Run the frontend with the virtualenv Python interpreter instead of the
+`venv/bin/streamlit` wrapper script. This avoids stale shebang issues if the
+project folder has been moved.
+
+```bash
+cd PermitAgent
+venv/bin/python -m streamlit run frontend.py
+```
+
+If you see `ModuleNotFoundError: No module named 'pydantic'`, you are almost
+certainly launching Streamlit with your system Python instead of the project
+virtualenv.
 
 ## Usage
 

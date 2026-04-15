@@ -21,6 +21,8 @@ GOOGLE_MAPS_API_KEY: str = os.getenv("GOOGLE_MAPS_API_KEY", "your-key-here")
 # LLM settings
 # ---------------------------------------------------------------------------
 LLM_MODEL: str = os.getenv("LLM_MODEL", "gpt-4o")
+OPENAI_TIMEOUT_SECONDS: float = float(os.getenv("OPENAI_TIMEOUT_SECONDS", "8"))
+GOOGLE_MAPS_TIMEOUT_SECONDS: float = float(os.getenv("GOOGLE_MAPS_TIMEOUT_SECONDS", "5"))
 
 # ---------------------------------------------------------------------------
 # Server settings

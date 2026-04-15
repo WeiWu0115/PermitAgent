@@ -13,23 +13,34 @@ from typing import Any
 
 from openai import OpenAI, OpenAIError
 
-from app.config import OPENAI_API_KEY, LLM_MODEL
+from app.config import OPENAI_API_KEY, LLM_MODEL, OPENAI_TIMEOUT_SECONDS
 
 logger = logging.getLogger(__name__)
 
 # Initialize client (lazy — will fail gracefully if key is missing)
 _client: OpenAI | None = None
+_llm_unavailable = False
 
 
 def _get_client() -> OpenAI | None:
     """Get or create the OpenAI client. Returns None if no valid key."""
     global _client
+    if _llm_unavailable:
+        return None
     if _client is not None:
         return _client
     if not OPENAI_API_KEY or OPENAI_API_KEY == "sk-placeholder":
         return None
-    _client = OpenAI(api_key=OPENAI_API_KEY)
-    return _client
+    try:
+        _client = OpenAI(
+            api_key=OPENAI_API_KEY,
+            timeout=OPENAI_TIMEOUT_SECONDS,
+            max_retries=0,
+        )
+        return _client
+    except Exception as e:
+        logger.error("Failed to initialize OpenAI client: %s", e)
+        return None
 
 
 def llm_call(
@@ -49,9 +60,11 @@ def llm_call(
     Agents should always have heuristic fallback logic for when this
     returns None.
     """
+    global _llm_unavailable
     client = _get_client()
     if client is None:
-        logger.warning("No OpenAI API key configured — using heuristic fallback.")
+        if not _llm_unavailable:
+            logger.warning("No OpenAI API key configured or LLM unavailable — using heuristic fallback.")
         return None
 
     try:
@@ -79,10 +92,12 @@ def llm_call(
 
     except OpenAIError as e:
         logger.error("OpenAI API error: %s", e)
+        _llm_unavailable = True
         return None
     except json.JSONDecodeError:
         logger.error("LLM returned non-JSON response: %s", text[:200])
         return None
     except Exception as e:
         logger.error("Unexpected error in LLM call: %s", e)
+        _llm_unavailable = True
         return None
